@@ -1,5 +1,13 @@
-function About() {
-  return <h1>About</h1>;
-}
-
-export default About;
+export const About = () => {
+  // little about story of me so far
+  // bunch of nerdy things that make me, ME
+  // both professional and personal
+  return (
+    <div>
+      <h1>This is my about page</h1>
+      <div>
+        <p>stuf goes here</p>
+      </div>
+    </div>
+  );
+};

@@ -1,17 +1,16 @@
 import { Outlet } from "react-router";
 
-import { ModeToggle } from "@/components/mode-toggle";
 import { Navbar } from "@/components/Nav";
 
-function Root() {
-  return (
-    <>
-      <Navbar />
-      <ModeToggle />
-      <h1>Hello world</h1>
-      <Outlet />
-    </>
-  );
-}
+export const Root = () => {
+  // basic layout
+  // header will contain the logo and navigation
+  // footer - make footer be at least the size of the page
 
-export default Root;
+  return (
+    <div className="border border-red-500">
+      <Navbar />
+      <Outlet />
+    </div>
+  );
+};
