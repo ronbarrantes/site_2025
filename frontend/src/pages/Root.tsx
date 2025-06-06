@@ -1,10 +1,13 @@
 import { Outlet } from "react-router";
 
+import { ModeToggle } from "@/components/mode-toggle";
+
 function Root() {
   return (
     <>
-      <h1>Hello world</h1>;
-      <Outlet />;
+      <ModeToggle />
+      <h1>Hello world</h1>
+      <Outlet />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import { createContext } from "react";
+
 import type { ThemeProviderState } from "./theme-provider-types";
 
 const initialState: ThemeProviderState = {
