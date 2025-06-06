@@ -1,5 +1,5 @@
-function Root() {
-  return <h1>Hello world</h1>;
+function About() {
+  return <h1>About</h1>;
 }
 
-export default Root;
+export default About;
