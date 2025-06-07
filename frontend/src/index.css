@@ -3,8 +3,8 @@
 
 @custom-variant dark (&:is(.dark *));
 
-.blurry {
-  @apply border border-red-100;
+.glass {
+  @apply rounded-xl bg-white/10 shadow-md backdrop-blur-md dark:bg-slate-950/10;
 }
 
 /* :root { */

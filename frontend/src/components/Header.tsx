@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import classNames from "classnames";
 import { NavLink } from "react-router";
 
@@ -28,15 +30,37 @@ const LinkItem = ({
   );
 };
 
+const logoColors = [
+  "group-hover:fill-amber-500",
+  "group-hover:fill-green-500",
+  "group-hover:fill-cyan-500",
+  "group-hover:fill-fuchsia-500",
+  "group-hover:fill-cyan-500",
+];
+
 export const Header = ({ className }: { className: string }) => {
+  const [logoColorIdx, setLogoColorIdx] = useState<number>(3);
+
   return (
     <div className={classNames(className)}>
-      <header className="blurry m-2 flex items-center justify-between rounded-xl bg-white fill-red-500 p-1 drop-shadow-xl dark:bg-slate-950">
+      <header className="glass m-2 flex items-center justify-between rounded-xl p-1 drop-shadow-xl">
         <span>
-          <NavLink to="/" className="group" aria-label="Home navigation">
+          <NavLink
+            onMouseOver={() => {
+              setLogoColorIdx(
+                logoColorIdx < logoColors.length - 1 ? logoColorIdx + 1 : 0
+              );
+            }}
+            to="/"
+            className="group"
+            aria-label="Home navigation"
+          >
             <Logo
               aria-label="Logo"
-              className="mx-2 h-10 w-48 group-hover:fill-fuchsia-500 group-hover:transition-all"
+              className={classNames(
+                "pointer-events-none mx-2 h-10 w-48 drop-shadow-sm/10 group-hover:transition-all dark:fill-white dark:drop-shadow-sm",
+                logoColors[logoColorIdx]
+              )}
             />
           </NavLink>
         </span>
