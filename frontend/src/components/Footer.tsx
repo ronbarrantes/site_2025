@@ -30,33 +30,6 @@ const LinkItem = ({
   );
 };
 
-const MainNav = () => {
-  return (
-    <nav className="mx-2">
-      <ul className="flex items-center gap-2 align-middle">
-        <LinkItem className="border-slate-500" to="/">
-          <span>Home</span>
-        </LinkItem>
-        <LinkItem className="border-green-500" to="/about">
-          About
-        </LinkItem>
-        <LinkItem className="border-cyan-500" to="/resume">
-          Resume
-        </LinkItem>
-        <LinkItem className="border-fuchsia-500" to="/portfolio">
-          Portfolio
-        </LinkItem>
-        <LinkItem className="border-lime-500" to="/contact">
-          Contact
-        </LinkItem>
-        <li>
-          <ModeToggle />
-        </li>
-      </ul>
-    </nav>
-  );
-};
-
 const logoColors = [
   "group-hover:fill-slate-500 dark:group-hover:fill-slate-500",
   "group-hover:fill-green-500 dark:group-hover:fill-green-500",
@@ -65,7 +38,7 @@ const logoColors = [
   "group-hover:fill-lime-500 dark:group-hover:fill-lime-500",
 ];
 
-export const Header = ({ className }: { className: string }) => {
+export const Footer = ({ className }: { className: string }) => {
   const [logoColorIdx, setLogoColorIdx] = useState<number>(3);
 
   return (
@@ -91,7 +64,28 @@ export const Header = ({ className }: { className: string }) => {
             />
           </NavLink>
         </span>
-        <MainNav />
+        <nav className="mx-2">
+          <ul className="flex items-center gap-2 align-middle">
+            <LinkItem className="border-slate-500" to="/">
+              <span>Home</span>
+            </LinkItem>
+            <LinkItem className="border-green-500" to="/about">
+              About
+            </LinkItem>
+            <LinkItem className="border-cyan-500" to="/resume">
+              Resume
+            </LinkItem>
+            <LinkItem className="border-fuchsia-500" to="/portfolio">
+              Portfolio
+            </LinkItem>
+            <LinkItem className="border-lime-500" to="/contact">
+              Contact
+            </LinkItem>
+            <li>
+              <ModeToggle />
+            </li>
+          </ul>
+        </nav>
       </header>
     </div>
   );
