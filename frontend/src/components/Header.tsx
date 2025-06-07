@@ -31,16 +31,12 @@ const LinkItem = ({
 export const Header = ({ className }: { className: string }) => {
   return (
     <div className={classNames(className)}>
-      <header
-        className={classNames(
-          "md:bg-opacity-50 m-2 flex items-center justify-between rounded-xl border border-red-500 bg-white fill-red-500 p-1 drop-shadow-xl dark:bg-slate-950"
-        )}
-      >
+      <header className="blurry m-2 flex items-center justify-between rounded-xl bg-white fill-red-500 p-1 drop-shadow-xl dark:bg-slate-950">
         <span>
           <NavLink to="/" className="group" aria-label="Home navigation">
             <Logo
               aria-label="Logo"
-              className="mx-2 h-10 w-48 transition-all group-hover:fill-fuchsia-600"
+              className="mx-2 h-10 w-48 group-hover:fill-fuchsia-500 group-hover:transition-all"
             />
           </NavLink>
         </span>
