@@ -7,6 +7,22 @@
   @apply rounded-xl border border-slate-950/5 bg-white/10 shadow-md backdrop-blur-md dark:border-slate-50/10 dark:bg-slate-950/10;
 }
 
+@keyframes slide-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(5vh);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .card {
+    view-timeline-name: --item-timeline;
+    animation: slide-fade-in both;
+    animation-timeline: --item-timeline;
+    animation-range: contain 0% contain 50%;
+  }
+}
+
 /* :root { */
 /*   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; */
 /*   line-height: 1.5; */
