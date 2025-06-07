@@ -31,11 +31,11 @@ const LinkItem = ({
 };
 
 const logoColors = [
-  "group-hover:fill-amber-500",
-  "group-hover:fill-green-500",
-  "group-hover:fill-cyan-500",
-  "group-hover:fill-fuchsia-500",
-  "group-hover:fill-cyan-500",
+  "group-hover:fill-slate-500 dark:group-hover:fill-slate-500",
+  "group-hover:fill-green-500 dark:group-hover:fill-green-500",
+  "group-hover:fill-cyan-500 dark:group-hover:fill-cyan-500",
+  "group-hover:fill-fuchsia-500 dark:group-hover:fill-fuchsia-500",
+  "group-hover:fill-lime-500 dark:group-hover:fill-lime-500",
 ];
 
 export const Header = ({ className }: { className: string }) => {
