@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 
-import { Navbar } from "@/components/Nav";
+import { Header } from "@/components/Header";
 
 export const Root = () => {
   // basic layout
@@ -9,7 +9,7 @@ export const Root = () => {
 
   return (
     <div className="border border-red-500">
-      <Navbar />
+      <Header />
       <Outlet />
     </div>
   );
