@@ -1,47 +1,72 @@
+import classNames from "classnames";
 import { NavLink } from "react-router";
 
 import { Logo } from "./logo/Logo";
 import { ModeToggle } from "./mode-toggle";
 
-const LinkItem = ({ children }: { children: React.ReactNode }) => {
-  return <li>{children}</li>;
+const LinkItem = ({
+  children,
+  className,
+  to,
+}: {
+  to: string;
+  className?: string;
+  children: React.ReactNode;
+}) => {
+  return (
+    <li className="group p-1">
+      <NavLink
+        to={to}
+        className={classNames(
+          "border-black transition-all group-hover:border-b-4",
+          className
+        )}
+      >
+        {children}
+      </NavLink>
+    </li>
+  );
 };
 
-export const Header = () => {
+export const Header = ({ className }: { className: string }) => {
   return (
-    <header className="flex items-center justify-between border border-green-500">
-      <span>
-        <NavLink to="/" aria-label="Home navigation">
-          <Logo
-            aria-label="Logo"
-            className="m-2 h-10 w-30 border border-red-500 fill-fuchsia-900 dark:fill-fuchsia-600"
-          />
-        </NavLink>
-      </span>
-      <nav className="mx-2">
-        <ul className="flex items-center gap-2 border border-red-500 align-middle [&>li]:border [&>li]:border-green-500">
-          <LinkItem>
-            <NavLink to="/">
+    <div className={classNames(className)}>
+      <header
+        className={classNames(
+          "md:bg-opacity-50 m-2 flex items-center justify-between rounded-xl border border-red-500 bg-white fill-red-500 p-1 drop-shadow-xl dark:bg-slate-950"
+        )}
+      >
+        <span>
+          <NavLink to="/" className="group" aria-label="Home navigation">
+            <Logo
+              aria-label="Logo"
+              className="mx-2 h-10 w-48 transition-all group-hover:fill-fuchsia-600"
+            />
+          </NavLink>
+        </span>
+        <nav className="mx-2">
+          <ul className="flex items-center gap-2 align-middle">
+            <LinkItem className="border-slate-500" to="/">
               <span>Home</span>
-            </NavLink>
-          </LinkItem>
-          <LinkItem>
-            <NavLink to="/about">About</NavLink>
-          </LinkItem>
-          <LinkItem>
-            <NavLink to="/resume">Resume</NavLink>
-          </LinkItem>
-          <LinkItem>
-            <NavLink to="/portfolio">Portfolio</NavLink>
-          </LinkItem>
-          <LinkItem>
-            <NavLink to="/contact">Contact</NavLink>
-          </LinkItem>
-          <LinkItem>
-            <ModeToggle />
-          </LinkItem>
-        </ul>
-      </nav>
-    </header>
+            </LinkItem>
+            <LinkItem className="border-green-500" to="/about">
+              About
+            </LinkItem>
+            <LinkItem className="border-cyan-500" to="/resume">
+              Resume
+            </LinkItem>
+            <LinkItem className="border-fuchsia-500" to="/portfolio">
+              Portfolio
+            </LinkItem>
+            <LinkItem className="border-lime-500" to="/contact">
+              Contact
+            </LinkItem>
+            <li>
+              <ModeToggle />
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
   );
 };

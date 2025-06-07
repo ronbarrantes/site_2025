@@ -8,8 +8,9 @@ export const Root = () => {
   // footer - make footer be at least the size of the page
 
   return (
-    <div className="border border-red-500">
-      <Header />
+    <div className="relative">
+      <Header className="absolute z-20 w-full" />
+      <div className="absolute h-96 w-96 bg-amber-200"></div>
       <Outlet />
     </div>
   );
