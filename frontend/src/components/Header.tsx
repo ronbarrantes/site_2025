@@ -1,40 +1,62 @@
 import { useState } from "react";
 
 import classNames from "classnames";
-import { NavLink } from "react-router";
+import { NavLink, type NavLinkProps } from "react-router";
 
 import { useLinksStore } from "@/hooks/use-links";
 import { Logo } from "./logo/Logo";
 import type { IconLink } from "./types/links";
 import { ModeToggle } from "./mode-toggle";
 
-const LinkItem = ({
-  children,
-  className,
+type CustomLinkType = {
+  to: string;
+  pageIdx: number;
+  className?: string;
+  children: React.ReactNode;
+} & NavLinkProps;
+
+const CustomNavLink = ({
   to,
+  pageIdx,
+  className,
+  children,
+  ...props
+}: CustomLinkType) => {
+  const { setIcon } = useLinksStore();
+  return (
+    <NavLink
+      onClick={() => {
+        const icon = to.split("/")[1] ? to.split("/")[1] : "home";
+        setIcon(icon as IconLink, pageIdx);
+      }}
+      to={to}
+      className={classNames(
+        "border-black transition-all group-hover:border-b-4",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </NavLink>
+  );
+};
+
+const LinkItem = ({
+  to,
+  pageIdx,
+  className,
+  children,
 }: {
   to: string;
+  pageIdx: number;
   className?: string;
   children: React.ReactNode;
 }) => {
-  const { setIcon } = useLinksStore();
-
   return (
     <li className="group p-1">
-      <NavLink
-        onClick={() => {
-          console.log();
-          const icon = to.split("/")[1] ? to.split("/")[1] : "home";
-          setIcon(icon as IconLink);
-        }}
-        to={to}
-        className={classNames(
-          "border-black transition-all group-hover:border-b-4",
-          className
-        )}
-      >
+      <CustomNavLink to={to} pageIdx={pageIdx} className={className}>
         {children}
-      </NavLink>
+      </CustomNavLink>
     </li>
   );
 };
@@ -43,19 +65,19 @@ const MainNav = () => {
   return (
     <nav className="mx-2">
       <ul className="flex items-center gap-2 align-middle">
-        <LinkItem className="border-slate-500" to="/">
+        <LinkItem pageIdx={1} className="border-slate-500" to="/">
           <span>Home</span>
         </LinkItem>
-        <LinkItem className="border-green-500" to="/about">
+        <LinkItem pageIdx={2} className="border-green-500" to="/about">
           About
         </LinkItem>
-        <LinkItem className="border-cyan-500" to="/resume">
+        <LinkItem pageIdx={3} className="border-cyan-500" to="/resume">
           Resume
         </LinkItem>
-        <LinkItem className="border-fuchsia-500" to="/portfolio">
+        <LinkItem pageIdx={4} className="border-fuchsia-500" to="/portfolio">
           Portfolio
         </LinkItem>
-        <LinkItem className="border-lime-500" to="/contact">
+        <LinkItem pageIdx={5} className="border-lime-500" to="/contact">
           Contact
         </LinkItem>
         <li>
@@ -81,13 +103,14 @@ export const Header = ({ className }: { className: string }) => {
     <div className={classNames(className)}>
       <header className="glass m-2 flex items-center justify-between rounded-xl border p-1 drop-shadow-xl">
         <span>
-          <NavLink
+          <CustomNavLink
             onMouseOver={() => {
               setLogoColorIdx(
                 logoColorIdx < logoColors.length - 1 ? logoColorIdx + 1 : 0
               );
             }}
             to="/"
+            pageIdx={1}
             className="group"
             aria-label="Home navigation"
           >
@@ -98,7 +121,7 @@ export const Header = ({ className }: { className: string }) => {
                 logoColors[logoColorIdx]
               )}
             />
-          </NavLink>
+          </CustomNavLink>
         </span>
         <MainNav />
       </header>

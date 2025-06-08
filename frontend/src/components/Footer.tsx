@@ -29,28 +29,29 @@ const LineSection = ({
 
 export const Footer = ({ className }: { className: string }) => {
   // console.log(theName);
-  const { iconLink } = useLinksStore();
+  const { iconLink, pageIdx } = useLinksStore();
   return (
     <div className={classNames(className)}>
       <footer className="glass flex items-center justify-between border-t drop-shadow-xl">
         <div className="flex">
           <LineSection
             direction="left"
-            className="bg-fuchsia-500 after:bg-fuchsia-500"
+            className="gap-1 bg-fuchsia-500 after:bg-fuchsia-500"
           >
-            <span>ronb</span>
+            <Icon name={iconLink} />
+            <span>{iconLink}</span>
           </LineSection>
           <LineSection
             direction="left"
             className="bg-blue-500 after:bg-blue-500"
           >
-            <Icon className="ml-2 text-white" name={iconLink} />
+            <span className="ml-2">{pageIdx}</span>
           </LineSection>
           <LineSection
             direction="left"
             className="bg-green-500 after:bg-green-500"
           >
-            <span className="ml-2">{iconLink}</span>
+            <span className="ml-2">🦆</span>
           </LineSection>
         </div>
         <div className="flex">

@@ -5,10 +5,11 @@ import type { IconLink } from "@/components/types/links";
 
 type LinksState = {
   iconLink: IconLink;
+  pageIdx: number;
 };
 
 type LinksActions = {
-  setIcon: (icon: IconLink) => void;
+  setIcon: (iconLink: IconLink, pageIdx: number) => void;
 };
 
 export type LinksStore = LinksActions & LinksState;
@@ -17,7 +18,7 @@ export const useLinksStore = create<LinksStore>()(
   devtools(
     (set) => ({
       iconLink: "home",
-      setIcon: (icon) => set({ iconLink: icon }),
+      setIcon: (iconLink, pageIdx) => set({ iconLink, pageIdx }),
     }),
     { name: "LINKS_STORE" }
   )
