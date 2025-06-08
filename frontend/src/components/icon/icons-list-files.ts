@@ -1,4 +1,4 @@
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineWarning } from "react-icons/ai";
 import { BsLightningCharge } from "react-icons/bs";
 import { FaRegFileAlt } from "react-icons/fa";
 import { FiClock, FiCpu, FiHome } from "react-icons/fi";
@@ -13,9 +13,9 @@ import {
   MdRefresh,
   MdRemove,
 } from "react-icons/md";
-import { RiErrorWarningLine } from "react-icons/ri";
 
 export const iconFileNames = {
+  about: { icon: MdOutlineInfo },
   arrow: { icon: MdArrowForward },
   check: { icon: MdCheck },
   chevron: { icon: MdChevronRight },
@@ -24,7 +24,6 @@ export const iconFileNames = {
   core: { icon: MdCircle },
   contact: { icon: LuContact },
   cpu: { icon: FiCpu },
-  document: { icon: FaRegFileAlt },
   home: { icon: FiHome },
   info: { icon: MdOutlineInfo },
   none: { icon: MdBlock },
@@ -32,8 +31,9 @@ export const iconFileNames = {
   power: { icon: BsLightningCharge },
   refresh: { icon: MdRefresh },
   remove: { icon: MdRemove },
+  resume: { icon: FaRegFileAlt },
   settings: { icon: LuSettings },
-  warning: { icon: RiErrorWarningLine },
+  warning: { icon: AiOutlineWarning },
 };
 
 export type IconsLisType = keyof typeof iconFileNames;

@@ -1,14 +1,14 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import type { IconList } from "@/components/types/links";
+import type { IconLink } from "@/components/types/links";
 
 type LinksState = {
-  currentIconListLink: IconList;
+  iconLink: IconLink;
 };
 
 type LinksActions = {
-  setIcon: (icon: IconList) => void;
+  setIcon: (icon: IconLink) => void;
 };
 
 export type LinksStore = LinksActions & LinksState;
@@ -16,10 +16,10 @@ export type LinksStore = LinksActions & LinksState;
 export const useLinksStore = create<LinksStore>()(
   devtools(
     (set) => ({
-      currentIconListLink: "home",
-      setIcon: (icon) => set({ currentIconListLink: icon }),
+      iconLink: "home",
+      setIcon: (icon) => set({ iconLink: icon }),
     }),
-    { name: "TEST_STORE" }
+    { name: "LINKS_STORE" }
   )
 );
 

@@ -1,4 +1,4 @@
-export type IconList =
+export type IconLink =
   | "home"
   | "about"
   | "warning"

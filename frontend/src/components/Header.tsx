@@ -18,6 +18,9 @@ const LinkItem = ({
   return (
     <li className="group p-1">
       <NavLink
+        onClick={() => {
+          console.log(to);
+        }}
         to={to}
         className={classNames(
           "border-black transition-all group-hover:border-b-4",
@@ -70,7 +73,7 @@ export const Header = ({ className }: { className: string }) => {
 
   return (
     <div className={classNames(className)}>
-      <header className="glass m-2 flex items-center justify-between rounded-xl p-1 drop-shadow-xl">
+      <header className="glass m-2 flex items-center justify-between rounded-xl border p-1 drop-shadow-xl">
         <span>
           <NavLink
             onMouseOver={() => {

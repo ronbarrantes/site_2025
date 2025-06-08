@@ -10,7 +10,7 @@
 @custom-variant dark (&:is(.dark *));
 
 .glass {
-  @apply rounded-xl border border-slate-950/5 bg-white/10 shadow-md backdrop-blur-md dark:border-slate-50/10 dark:bg-slate-950/10;
+  @apply rounded-xl border-slate-950/5 bg-white/10 shadow-md backdrop-blur-md dark:border-slate-50/10 dark:bg-slate-950/10;
 }
 
 * body {
