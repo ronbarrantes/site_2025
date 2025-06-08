@@ -2,7 +2,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { BsFillLightningChargeFill } from "react-icons/bs";
 import { FaLongArrowAltRight, FaRegFileAlt } from "react-icons/fa";
 import { FiClock, FiCpu } from "react-icons/fi";
-import { LuBriefcase } from "react-icons/lu";
+import { LuBriefcase, LuContact } from "react-icons/lu";
 import {
   MdArrowForward,
   MdBlock,
@@ -18,24 +18,25 @@ import {
 import { RiErrorWarningFill } from "react-icons/ri";
 
 export const iconFileNames = {
-  core: { icon: MdCircle },
-  portfolio: { icon: LuBriefcase },
-  info: { icon: MdOutlineInfo },
-  power: { icon: BsFillLightningChargeFill },
-  cpu: { icon: FiCpu },
-  none: { icon: MdBlock },
-  document: { icon: FaRegFileAlt },
   arrow: { icon: MdArrowForward },
+  check: { icon: MdCheck },
+  chevron: { icon: MdChevronRight },
+  clock: { icon: FiClock },
+  close: { icon: AiOutlineClose },
+  core: { icon: MdCircle },
+  contact: { icon: LuContact },
+  cpu: { icon: FiCpu },
+  document: { icon: FaRegFileAlt },
   flatArrow: { icon: FaLongArrowAltRight },
-  warning: { icon: RiErrorWarningFill },
+  home: { icon: MdHome },
+  info: { icon: MdOutlineInfo },
+  none: { icon: MdBlock },
+  portfolio: { icon: LuBriefcase },
+  power: { icon: BsFillLightningChargeFill },
+  refresh: { icon: MdRefresh },
   remove: { icon: MdRemove },
   settings: { icon: MdSettings },
-  home: { icon: MdHome },
-  chevron: { icon: MdChevronRight },
-  close: { icon: AiOutlineClose },
-  check: { icon: MdCheck },
-  refresh: { icon: MdRefresh },
-  clock: { icon: FiClock },
+  warning: { icon: RiErrorWarningFill },
 };
 
 export type IconsLisType = keyof typeof iconFileNames;
