@@ -9,11 +9,19 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.container {
+  @apply max-w-screen-xl;
+}
+
 .glass {
   @apply rounded-xl border-slate-950/5 bg-white/10 shadow-md backdrop-blur-md dark:border-slate-50/10 dark:bg-slate-950/10;
 }
 
-* body {
+* {
+  box-sizing: border-box;
+}
+
+body {
   font-family: "Fira Mono", monospace;
   /*
   .fira-mono-regular {

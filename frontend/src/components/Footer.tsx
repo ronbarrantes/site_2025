@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { Icon } from "@/components/icon";
 import { useClock } from "@/hooks/use-clock";
 import { useLinksStore } from "@/hooks/use-links";
+import { toast } from "sonner";
 
 const LineSection = ({
   direction,
@@ -44,7 +45,7 @@ export const Footer = ({ className }: { className: string }) => {
           </LineSection>
           <LineSection
             direction="left"
-            className="bg-cyan-300 after:bg-cyan-300 dark:bg-cyan-800 dark:after:bg-cyan-800"
+            className="hidden bg-cyan-300 after:bg-cyan-300 sm:flex dark:bg-cyan-800 dark:after:bg-cyan-800"
           >
             <span className="ml-2">{pageIdx}</span>
           </LineSection>
@@ -52,7 +53,9 @@ export const Footer = ({ className }: { className: string }) => {
             direction="left"
             className="bg-slate-300 after:bg-slate-300 dark:bg-slate-800 dark:after:bg-slate-800"
           >
-            <Icon className="ml-2" name="duck" />
+            <button onClick={() => toast("QUACK!")}>
+              <Icon className="ml-2" name="duck" />
+            </button>
           </LineSection>
         </div>
 
@@ -78,7 +81,7 @@ export const Footer = ({ className }: { className: string }) => {
           </LineSection>
           <LineSection
             direction="right"
-            className="bg-fuchsia-300 before:bg-fuchsia-300 dark:bg-fuchsia-800 dark:before:bg-fuchsia-800"
+            className="hidden bg-fuchsia-300 before:bg-fuchsia-300 sm:flex dark:bg-fuchsia-800 dark:before:bg-fuchsia-800"
           >
             <span>{date}</span>
           </LineSection>
