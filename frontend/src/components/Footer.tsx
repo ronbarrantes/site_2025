@@ -1,8 +1,8 @@
 import classNames from "classnames";
 
 import { Icon } from "@/components/icon";
-import { useLinksStore } from "@/hooks/use-links";
 import { useClock } from "@/hooks/use-clock";
+import { useLinksStore } from "@/hooks/use-links";
 
 const LineSection = ({
   direction,
@@ -29,7 +29,6 @@ const LineSection = ({
 );
 
 export const Footer = ({ className }: { className: string }) => {
-  // console.log(theName);
   const { iconLink, pageIdx } = useLinksStore();
   const { date, time } = useClock();
   return (
@@ -38,40 +37,48 @@ export const Footer = ({ className }: { className: string }) => {
         <div className="flex">
           <LineSection
             direction="left"
-            className="gap-1 bg-fuchsia-500 after:bg-fuchsia-500"
+            className="gap-1 bg-fuchsia-300 after:bg-fuchsia-300 dark:bg-fuchsia-800 dark:after:bg-fuchsia-800"
           >
             <Icon name={iconLink} />
             <span>{iconLink}</span>
           </LineSection>
           <LineSection
             direction="left"
-            className="bg-blue-500 after:bg-blue-500"
+            className="bg-cyan-300 after:bg-cyan-300 dark:bg-cyan-800 dark:after:bg-cyan-800"
           >
             <span className="ml-2">{pageIdx}</span>
           </LineSection>
           <LineSection
             direction="left"
-            className="bg-green-500 after:bg-green-500"
+            className="bg-slate-300 after:bg-slate-300 dark:bg-slate-800 dark:after:bg-slate-800"
           >
-            <span className="ml-2">🦆</span>
+            <Icon className="ml-2" name="duck" />
           </LineSection>
         </div>
+
         <div className="flex">
-          <LineSection
-            direction="right"
-            className="bg-green-500 before:bg-green-500"
-          >
-            <Icon name="home" className="mr-2" />
+          <LineSection className="flex gap-2">
+            <a href="https://github.com/ronbarrantes" target="_blank">
+              <Icon name="github" />
+            </a>
+            <span className="text-slate-400 dark:text-slate-600">|</span>
+            <a
+              className="mr-0"
+              href="https://www.linkedin.com/in/ronbarrantes"
+              target="_blank"
+            >
+              <Icon name="linkedin" />
+            </a>
           </LineSection>
           <LineSection
             direction="right"
-            className="bg-blue-500 before:bg-blue-500"
+            className="bg-cyan-300 before:bg-cyan-300 dark:bg-cyan-800 dark:before:bg-cyan-800"
           >
             <span className="mr-2">{time}</span>
           </LineSection>
           <LineSection
             direction="right"
-            className="bg-fuchsia-500 before:bg-fuchsia-500"
+            className="bg-fuchsia-300 before:bg-fuchsia-300 dark:bg-fuchsia-800 dark:before:bg-fuchsia-800"
           >
             <span>{date}</span>
           </LineSection>
