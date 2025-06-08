@@ -18,6 +18,7 @@ export const useLinksStore = create<LinksStore>()(
   devtools(
     (set) => ({
       iconLink: "home",
+      pageIdx: 1,
       setIcon: (iconLink, pageIdx) => set({ iconLink, pageIdx }),
     }),
     { name: "LINKS_STORE" }

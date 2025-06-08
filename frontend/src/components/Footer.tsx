@@ -2,6 +2,7 @@ import classNames from "classnames";
 
 import { Icon } from "@/components/icon";
 import { useLinksStore } from "@/hooks/use-links";
+import { useClock } from "@/hooks/use-clock";
 
 const LineSection = ({
   direction,
@@ -30,6 +31,7 @@ const LineSection = ({
 export const Footer = ({ className }: { className: string }) => {
   // console.log(theName);
   const { iconLink, pageIdx } = useLinksStore();
+  const { date, time } = useClock();
   return (
     <div className={classNames(className)}>
       <footer className="glass flex items-center justify-between border-t drop-shadow-xl">
@@ -65,13 +67,13 @@ export const Footer = ({ className }: { className: string }) => {
             direction="right"
             className="bg-blue-500 before:bg-blue-500"
           >
-            <span className="mr-2">ronb</span>
+            <span className="mr-2">{time}</span>
           </LineSection>
           <LineSection
             direction="right"
             className="bg-fuchsia-500 before:bg-fuchsia-500"
           >
-            <span>ronb</span>
+            <span>{date}</span>
           </LineSection>
         </div>
       </footer>
