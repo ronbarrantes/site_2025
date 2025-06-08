@@ -1,6 +1,6 @@
 import { AiOutlineClose } from "react-icons/ai";
 import { BsLightningCharge } from "react-icons/bs";
-import { FaLongArrowAltRight, FaRegFileAlt } from "react-icons/fa";
+import { FaRegFileAlt } from "react-icons/fa";
 import { FiClock, FiCpu, FiHome } from "react-icons/fi";
 import { LuBriefcase, LuContact, LuSettings } from "react-icons/lu";
 import {
@@ -25,7 +25,6 @@ export const iconFileNames = {
   contact: { icon: LuContact },
   cpu: { icon: FiCpu },
   document: { icon: FaRegFileAlt },
-  flatArrow: { icon: FaLongArrowAltRight },
   home: { icon: FiHome },
   info: { icon: MdOutlineInfo },
   none: { icon: MdBlock },

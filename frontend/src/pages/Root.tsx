@@ -42,10 +42,6 @@ export const Root = () => {
           :arrow
         </TheCheck>
         <TheCheck>
-          <Icon name="flatArrow" />
-          :flatArrow
-        </TheCheck>
-        <TheCheck>
           <Icon name="warning" />
           :warning
         </TheCheck>
