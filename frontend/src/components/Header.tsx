@@ -3,7 +3,9 @@ import { useState } from "react";
 import classNames from "classnames";
 import { NavLink } from "react-router";
 
+import { useLinksStore } from "@/hooks/use-links";
 import { Logo } from "./logo/Logo";
+import type { IconLink } from "./types/links";
 import { ModeToggle } from "./mode-toggle";
 
 const LinkItem = ({
@@ -15,11 +17,15 @@ const LinkItem = ({
   className?: string;
   children: React.ReactNode;
 }) => {
+  const { setIcon } = useLinksStore();
+
   return (
     <li className="group p-1">
       <NavLink
         onClick={() => {
-          console.log(to);
+          console.log();
+          const icon = to.split("/")[1] ? to.split("/")[1] : "home";
+          setIcon(icon as IconLink);
         }}
         to={to}
         className={classNames(

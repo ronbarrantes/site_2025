@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
-
 import classNames from "classnames";
 
 import { Icon } from "@/components/icon";
-import type { IconLink } from "./types/links";
 import { useLinksStore } from "@/hooks/use-links";
 
 const LineSection = ({
@@ -48,7 +45,6 @@ export const Footer = ({ className }: { className: string }) => {
             className="bg-blue-500 after:bg-blue-500"
           >
             <Icon className="ml-2 text-white" name={iconLink} />
-            <Icon className="ml-2 text-white" name={"info"} />
           </LineSection>
           <LineSection
             direction="left"
