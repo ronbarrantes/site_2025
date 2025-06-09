@@ -9,6 +9,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.spacer {
+  @apply pt-16 pb-8;
+}
+
 .container {
   @apply max-w-screen-xl;
 }
@@ -23,6 +27,10 @@
 
 body {
   font-family: "Fira Mono", monospace;
+}
+
+h1 {
+  @apply text-5xl;
 }
 
 @keyframes slide-fade-in {
