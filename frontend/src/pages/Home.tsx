@@ -2,7 +2,7 @@ export const Home = () => {
   // contains a blurp of me welcoming to my site
   // the things that I'm doing right now
   return (
-    <div className="flex">
+    <div className="block sm:flex">
       <div>
         <h1>Welcome to my site</h1>
         <span>I'm glad you found it</span>

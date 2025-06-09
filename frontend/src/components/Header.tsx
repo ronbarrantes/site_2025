@@ -100,8 +100,8 @@ export const Header = ({ className }: { className: string }) => {
   const [logoColorIdx, setLogoColorIdx] = useState<number>(3);
 
   return (
-    <div className={classNames(className)}>
-      <header className="glass m-2 flex items-center justify-between rounded-xl border p-1 drop-shadow-xl">
+    <div className={classNames("px-2", className)}>
+      <header className="glass flex items-center justify-between rounded-xl border p-1 drop-shadow-xl">
         <span>
           <CustomNavLink
             onMouseOver={() => {
