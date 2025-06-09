@@ -15,9 +15,9 @@ type Signal = {
   signal: AbortSignal | undefined;
 };
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = import.meta.env.VITE_API_URL;
 
-export const nowApi = {
+const nowApi = {
   get: async ({ signal }: Signal) => {
     return await axios<NowData[]>({
       method: "get",
@@ -43,8 +43,7 @@ export const nowApi = {
   },
 };
 
-// ASSIGNMENTS
-export const useNow = () => {
+const useNow = () => {
   const queryClient = useQueryClient();
   const { data, isLoading, error, isPending } = useQuery<NowData[]>({
     queryKey: [queryKeys.NOW],
@@ -69,14 +68,7 @@ export const useNow = () => {
   const deleteNow = useMutation({
     mutationFn: nowApi.delete,
     onSuccess: (resData) => {
-      console.info({
-        message: "Delete assignment successfully sent",
-        status_code: resData.status,
-        data: {
-          reqUrl: resData.config.url,
-          method: resData.config.method,
-        },
-      });
+      console.info("SUCCESS", resData);
     },
 
     onError: (resData) => {
@@ -93,7 +85,7 @@ export const useNow = () => {
   const getState = () => queryClient.getQueryState<NowData[]>([queryKeys.NOW]);
 
   return {
-    assignments: {
+    now: {
       get: {
         data: data,
         isLoading: isLoading,
@@ -104,6 +96,20 @@ export const useNow = () => {
       delete: deleteNow,
       refetch: refetchNow,
       getState,
+    },
+  };
+};
+
+export const useRoutes = () => {
+  const { now } = useNow();
+
+  return {
+    data: {
+      now,
+    },
+
+    global: {
+      isPending: now.get.isPending,
     },
   };
 };
