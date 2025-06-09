@@ -1,7 +1,13 @@
-import classNames from "classnames";
+import clx from "classnames";
 
-const NowItem = ({ children }: { children: React.ReactNode }) => {
-  return <li>{children}</li>;
+const NowItem = ({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) => {
+  return <li className={clx(className)}>{children}</li>;
 };
 
 export const Home = () => {
@@ -12,7 +18,7 @@ export const Home = () => {
         <span>I'm glad you found it</span>
       </div>
       <div
-        className={classNames(
+        className={clx(
           "spacer h-screen overflow-hidden overflow-y-scroll bg-red-200 md:w-2/3"
         )}
       >

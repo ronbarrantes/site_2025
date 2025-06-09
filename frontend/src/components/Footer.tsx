@@ -1,9 +1,9 @@
 import classNames from "classnames";
+import { toast } from "sonner";
 
 import { Icon } from "@/components/icon";
 import { useClock } from "@/hooks/use-clock";
 import { useLinksStore } from "@/hooks/use-links";
-import { toast } from "sonner";
 
 const LineSection = ({
   direction,
