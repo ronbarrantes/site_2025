@@ -11,6 +11,8 @@ type NowData = {
   id: number;
   title: string;
   desc: string;
+  created_at: string;
+  updated_at: string;
 };
 
 type Signal = {
