@@ -1,6 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 
+import { API_URL } from "@/utils/constants";
+
 const queryKeys = {
   NOW: "now",
 };
@@ -14,8 +16,6 @@ type NowData = {
 type Signal = {
   signal: AbortSignal | undefined;
 };
-
-const API_URL = import.meta.env.VITE_API_URL;
 
 const nowApi = {
   get: async ({ signal }: Signal) => {
