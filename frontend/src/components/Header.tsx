@@ -100,7 +100,7 @@ export const Header = ({ className }: { className: string }) => {
   const [logoColorIdx, setLogoColorIdx] = useState<number>(3);
 
   return (
-    <div className={classNames("px-2", className)}>
+    <div className={classNames("px-2 pt-1", className)}>
       <header className="glass container mx-auto flex items-center justify-between rounded-xl border p-1 drop-shadow-xl">
         <span>
           <CustomNavLink
