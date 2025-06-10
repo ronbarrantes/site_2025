@@ -101,7 +101,7 @@ export const Header = ({ className }: { className: string }) => {
 
   return (
     <div className={classNames("px-2 pt-1", className)}>
-      <header className="glass container mx-auto flex items-center justify-between rounded-xl border border-slate-950/5 p-1 drop-shadow-xl dark:border-slate-50/10">
+      <header className="glass container mx-auto flex items-center justify-between rounded-xl border border-slate-950/5 p-1 pt-1.5 drop-shadow-xl dark:border-slate-50/10">
         <span>
           <CustomNavLink
             onMouseOver={() => {

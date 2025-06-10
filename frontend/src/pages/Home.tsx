@@ -22,9 +22,11 @@ export const Home = () => {
   const nowData = data.now.get.data || [];
   const isLoading = data.now.get.isLoading;
 
+  console.log("DATA", nowData);
+
   return (
-    <div className="block h-screen items-center justify-between gap-5 overflow-y-scroll border border-red-500 pt-16 md:flex md:overflow-hidden">
-      <div className="mb-0 h-fit w-full border-2 border-green-500 md:mb-10 md:w-1/3">
+    <div className="block h-screen items-center justify-between gap-5 overflow-y-scroll pt-16 md:flex md:overflow-hidden">
+      <div className="mb-8 h-fit w-full border-2 border-green-500 md:mb-10 md:w-1/3">
         <h1 className="mb-4">Welcome to my site</h1>
         <span className="text-2xl">I'm glad you found it</span>
       </div>
