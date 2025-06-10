@@ -15,12 +15,8 @@ const NowItem = ({
 
 export const Home = () => {
   const { data } = useRoutes();
-
   const nowData = data.now.get.data || [];
-
   const isLoading = data.now.get.isLoading;
-
-  console.log("DATA", nowData);
 
   return (
     <div className="block items-center justify-between gap-5 overflow-hidden md:flex">
