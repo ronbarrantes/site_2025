@@ -34,7 +34,7 @@ export const Footer = ({ className }: { className: string }) => {
   const { date, time } = useClock();
   return (
     <div className={classNames(className)}>
-      <footer className="glass flex items-center justify-between border-t drop-shadow-xl">
+      <footer className="glass flex items-center justify-between border-t border-slate-950/5 drop-shadow-xl dark:border-slate-50/10">
         <div className="flex">
           <LineSection
             direction="left"
