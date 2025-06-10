@@ -18,7 +18,7 @@
 }
 
 .glass {
-  @apply rounded-xl border-slate-950/5 bg-white/10 shadow-md backdrop-blur-md dark:border-slate-50/10 dark:bg-slate-950/10;
+  @apply bg-white/10 shadow-md backdrop-blur-md dark:bg-slate-950/10;
 }
 
 * {
@@ -27,10 +27,15 @@
 
 body {
   font-family: "Fira Mono", monospace;
+  @apply bg-radial-[at_80%_0%] from-slate-200 from-10% to-fuchsia-50 dark:from-slate-950 dark:to-purple-950/20;
 }
 
 h1 {
   @apply text-5xl;
+}
+
+h2 {
+  @apply text-3xl;
 }
 
 @keyframes slide-fade-in {
@@ -39,6 +44,12 @@ h1 {
     transform: translateY(5vh);
   }
 }
+
+/*
+        'hero-radial-dark': 'radial-gradient(circle, rgba(2, 0, 36, 1) 70%, rgba(9, 9, 121, 1) 100%)',
+        'hero-radial-light': 'radial-gradient(circle, rgba(255, 255, 255, 1) 70%, rgba(230, 230, 250, 1) 100%)',
+
+  */
 
 /* USE THIS FOR ITEMS THAT FADE IN FROM THE TOP */
 @media (prefers-reduced-motion: no-preference) {
