@@ -13,6 +13,10 @@
   @apply pt-16 pb-8;
 }
 
+.spacer-variable {
+  @apply pt-16 pb-8 md:pt-0;
+}
+
 .container {
   @apply max-w-screen-xl;
 }
