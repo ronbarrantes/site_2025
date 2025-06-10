@@ -1,21 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap");
 
-/* @import "@fontsource-variable/fira-code"; */
-/* @import "@fontsource-variable/fira-code/wght.css"; */
-/* @import "@fontsource-variable/fira-code/wght-italic.css"; */
-
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-
-.spacer {
-  @apply pt-16 pb-8;
-}
-
-.spacer-variable {
-  @apply pt-16 pb-8 md:pt-0;
-}
 
 .container {
   @apply max-w-screen-xl;
