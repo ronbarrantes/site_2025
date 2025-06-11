@@ -1,1 +1,5 @@
 /other_stuff
+
+# ALL ENVS EXCEPT .env.sample
+**/.env*
+!**/.env.sample
