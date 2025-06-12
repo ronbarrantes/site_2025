@@ -44,7 +44,7 @@ const FooterMediaItem = ({
         href={href}
         target="_blank"
       >
-        <Icon name={label as IconsLisType} />
+        <Icon tooltip name={label as IconsLisType} />
       </a>
     </>
   );
@@ -73,10 +73,10 @@ export const Footer = ({ className }: { className: string }) => {
           </LineSection>
           <LineSection
             direction="left"
-            className="bg-slate-300 after:bg-slate-300 dark:bg-slate-800 dark:after:bg-slate-800"
+            className="bg-slate-30 tooltip asChild0 after:bg-slate-300 dark:bg-slate-800 dark:after:bg-slate-800"
           >
             <button onClick={() => toast("QUACK!")}>
-              <Icon className="ml-2" name="duck" />
+              <Icon tooltip asChild className="ml-2" name="duck" />
             </button>
           </LineSection>
           <LineSection className="flex gap-2">
@@ -99,14 +99,16 @@ export const Footer = ({ className }: { className: string }) => {
         <div className="flex">
           <LineSection
             direction="right"
-            className="bg-cyan-300 before:bg-cyan-300 dark:bg-cyan-800 dark:before:bg-cyan-800"
+            className="gap-2 bg-cyan-300 before:bg-cyan-300 dark:bg-cyan-800 dark:before:bg-cyan-800"
           >
+            <Icon name="clock" />
             <span className="mr-2">{time}</span>
           </LineSection>
           <LineSection
             direction="right"
-            className="hidden bg-fuchsia-300 before:bg-fuchsia-300 sm:flex dark:bg-fuchsia-800 dark:before:bg-fuchsia-800"
+            className="hidden gap-2 bg-fuchsia-300 before:bg-fuchsia-300 sm:flex dark:bg-fuchsia-800 dark:before:bg-fuchsia-800"
           >
+            <Icon name="calendar" />
             <span>{date}</span>
           </LineSection>
         </div>

@@ -23,14 +23,18 @@ const CustomNavLink = ({
   ...props
 }: CustomLinkType) => {
   const { setIcon } = useLinksStore();
+
+  const handleClick = () => {
+    const icon = to.split("/")[1] ? to.split("/")[1] : "home";
+    setIcon(icon as IconLink, pageIdx);
+  };
+
   return (
     <NavLink
-      onClick={() => {
-        const icon = to.split("/")[1] ? to.split("/")[1] : "home";
-        setIcon(icon as IconLink, pageIdx);
-      }}
+      onClick={handleClick}
       to={to}
       className={classNames(
+        window.location.pathname === to && "border-b-4",
         "border-black transition-all group-hover:border-b-4",
         className
       )}

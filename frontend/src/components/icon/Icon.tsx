@@ -11,10 +11,12 @@ type IconProps = {
   name: IconsLisType;
   tooltip?: boolean;
   className?: string;
+  asChild?: boolean;
 };
 
 export const Icon = ({
   tooltip = false,
+  asChild = false,
   name,
   className,
   ...props
@@ -27,7 +29,7 @@ export const Icon = ({
   if (tooltip) {
     return (
       <Tooltip>
-        <TooltipTrigger>{comp}</TooltipTrigger>
+        <TooltipTrigger asChild={asChild}>{comp}</TooltipTrigger>
         <TooltipContent>
           <p>{name}</p>
         </TooltipContent>
