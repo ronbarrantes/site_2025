@@ -73,7 +73,7 @@ export const Footer = ({ className }: { className: string }) => {
           </LineSection>
           <LineSection
             direction="left"
-            className="bg-slate-30 tooltip asChild0 after:bg-slate-300 dark:bg-slate-800 dark:after:bg-slate-800"
+            className="bg-slate-300 after:bg-slate-300 dark:bg-slate-700 dark:after:bg-slate-700"
           >
             <button onClick={() => toast("QUACK!")}>
               <Icon tooltip asChild className="ml-2" name="duck" />
