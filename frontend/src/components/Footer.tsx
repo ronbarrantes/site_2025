@@ -2,8 +2,11 @@ import classNames from "classnames";
 import { toast } from "sonner";
 
 import { Icon } from "@/components/icon";
+import { mediaLinks } from "@/data/text";
 import { useClock } from "@/hooks/use-clock";
 import { useLinksStore } from "@/hooks/use-links";
+import type { Link } from "@/lib/types";
+import type { IconsLisType } from "./icon/icons-list-files";
 
 const LineSection = ({
   direction,
@@ -29,6 +32,25 @@ const LineSection = ({
   </div>
 );
 
+const FooterMediaItem = ({
+  label,
+  href,
+  isLast,
+}: Link & { isLast: boolean; className?: string }) => {
+  return (
+    <>
+      <a
+        className={classNames("mx-1", isLast && "mr-0")}
+        href={href}
+        target="_blank"
+      >
+        <Icon name={label as IconsLisType} />
+      </a>
+    </>
+  );
+};
+
+//{!isLast && <span className="text-slate-400 dark:text-slate-600">|</span>}
 export const Footer = ({ className }: { className: string }) => {
   const { iconLink, pageIdx } = useLinksStore();
   const { date, time } = useClock();
@@ -57,22 +79,24 @@ export const Footer = ({ className }: { className: string }) => {
               <Icon className="ml-2" name="duck" />
             </button>
           </LineSection>
+          <LineSection className="flex gap-2">
+            {mediaLinks.map((item, idx) => {
+              const isLast = mediaLinks.length - 1 === idx;
+              return (
+                <FooterMediaItem
+                  key={`footer-${item}--${idx}`}
+                  {...item}
+                  isLast={isLast}
+                />
+              );
+            })}
+            <span className="text-slate-400 dark:text-slate-600">
+              <Icon className="rotate-180" name="chevronLeft" />
+            </span>
+          </LineSection>
         </div>
 
         <div className="flex">
-          <LineSection className="flex gap-2">
-            <a href="https://github.com/ronbarrantes" target="_blank">
-              <Icon name="github" />
-            </a>
-            <span className="text-slate-400 dark:text-slate-600">|</span>
-            <a
-              className="mr-0"
-              href="https://www.linkedin.com/in/ronbarrantes"
-              target="_blank"
-            >
-              <Icon name="linkedin" />
-            </a>
-          </LineSection>
           <LineSection
             direction="right"
             className="bg-cyan-300 before:bg-cyan-300 dark:bg-cyan-800 dark:before:bg-cyan-800"

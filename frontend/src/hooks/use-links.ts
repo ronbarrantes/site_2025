@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import type { IconLink } from "@/components/types/links";
+import type { IconLink } from "@/lib/types";
 
 type LinksState = {
   iconLink: IconLink;

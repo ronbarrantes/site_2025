@@ -4,8 +4,8 @@ import classNames from "classnames";
 import { NavLink, type NavLinkProps } from "react-router";
 
 import { useLinksStore } from "@/hooks/use-links";
+import type { IconLink } from "@/lib/types";
 import { Logo } from "./logo/Logo";
-import type { IconLink } from "./types/links";
 import { ModeToggle } from "./mode-toggle";
 
 type CustomLinkType = {

@@ -1,6 +1,12 @@
 import { AiOutlineClose, AiOutlineWarning } from "react-icons/ai";
-import { BsLightningCharge } from "react-icons/bs";
-import { FaFacebook, FaGithub, FaLinkedin, FaRegFileAlt } from "react-icons/fa";
+import { BsChevronLeft, BsLightningCharge } from "react-icons/bs";
+import {
+  FaFacebook,
+  FaGithub,
+  FaLinkedin,
+  FaReact,
+  FaRegFileAlt,
+} from "react-icons/fa";
 import { FiCalendar, FiClock, FiCpu, FiHome } from "react-icons/fi";
 import { GiPlasticDuck } from "react-icons/gi";
 import { LuBriefcase, LuContact, LuSettings } from "react-icons/lu";
@@ -14,12 +20,45 @@ import {
   MdRefresh,
   MdRemove,
 } from "react-icons/md";
+import { RiNextjsFill } from "react-icons/ri";
+import {
+  SiAdobeillustrator,
+  SiAdobeindesign,
+  SiAdobephotoshop,
+  SiAdobepremierepro,
+  SiCss3,
+  SiFacebook,
+  SiHtml5,
+  SiJavascript,
+  SiJest,
+  SiMocha,
+  SiMysql,
+  SiPlanetscale,
+  SiPostgresql,
+  SiPython,
+  SiRedis,
+  SiRedux,
+  SiRetool,
+  SiRubyonrails,
+  SiSelenium,
+  SiStripe,
+  SiTailwindcss,
+  SiTrpc,
+  SiTurborepo,
+  SiTypescript,
+  SiVercel,
+  SiVite,
+  SiWordpress,
+} from "react-icons/si";
+import { TbBrandAzure, TbBrandReactNative } from "react-icons/tb";
+
 export const iconFileNames = {
   about: { icon: MdOutlineInfo },
   arrow: { icon: MdArrowForward },
   calendar: { icon: FiCalendar },
   check: { icon: MdCheck },
   chevron: { icon: MdChevronRight },
+  chevronLeft: { icon: BsChevronLeft },
   clock: { icon: FiClock },
   close: { icon: AiOutlineClose },
   core: { icon: MdCircle },
@@ -39,6 +78,41 @@ export const iconFileNames = {
   resume: { icon: FaRegFileAlt },
   settings: { icon: LuSettings },
   warning: { icon: AiOutlineWarning },
+
+  // ICONS FOR TECHNOLOGIES
+  azure: { icon: TbBrandAzure },
+  css: { icon: SiCss3 },
+  facebook: { icon: SiFacebook },
+  html: { icon: SiHtml5 },
+  illustrator: { icon: SiAdobeillustrator },
+  indesign: { icon: SiAdobeindesign },
+  javascript: { icon: SiJavascript },
+  jest: { icon: SiJest },
+  mochajs: { icon: SiMocha },
+  mysql: { icon: SiMysql },
+  nextjs: { icon: RiNextjsFill },
+  photoshop: { icon: SiAdobephotoshop },
+  planetscale: { icon: SiPlanetscale },
+  postgresql: { icon: SiPostgresql },
+  premierepro: { icon: SiAdobepremierepro },
+  python: { icon: SiPython },
+  react: { icon: FaReact },
+  rails: { icon: SiRubyonrails },
+  reactnative: { icon: TbBrandReactNative },
+  redis: { icon: SiRedis },
+  redux: { icon: SiRedux },
+  retool: { icon: SiRetool },
+  selenium: { icon: SiSelenium },
+  stripe: { icon: SiStripe },
+  tailwind: { icon: SiTailwindcss },
+  turborepo: { icon: SiTurborepo },
+  trpc: { icon: SiTrpc },
+  typescript: { icon: SiTypescript },
+  vercel: { icon: SiVercel },
+  vite: { icon: SiVite },
+  wordpress: { icon: SiWordpress },
+  // knockout: { icon: ___knockout___ },
+  // fluentui: { icon: Flue },
 };
 
 export type IconsLisType = keyof typeof iconFileNames;
