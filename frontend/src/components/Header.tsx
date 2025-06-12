@@ -3,8 +3,8 @@ import { useState } from "react";
 import classNames from "classnames";
 import { NavLink, type NavLinkProps } from "react-router";
 
-import { useLinksStore } from "@/hooks/use-links";
 import type { IconLink } from "@/lib/types";
+import { useLinksStore } from "@/store/use-links";
 import { Logo } from "./logo/Logo";
 import { ModeToggle } from "./mode-toggle";
 

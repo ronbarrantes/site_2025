@@ -24,9 +24,3 @@ export const useLinksStore = create<LinksStore>()(
     { name: "LINKS_STORE" }
   )
 );
-
-// export function useIsComplete() {
-//   return useTestStore(
-//     (state) => state.userAnswers.length >= state.questions.length - 1
-//   );
-// }

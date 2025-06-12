@@ -4,8 +4,8 @@ import { toast } from "sonner";
 import { Icon } from "@/components/icon";
 import { mediaLinks } from "@/data/text";
 import { useClock } from "@/hooks/use-clock";
-import { useLinksStore } from "@/hooks/use-links";
 import type { Link } from "@/lib/types";
+import { useLinksStore } from "@/store/use-links";
 import type { IconsLisType } from "./icon/icons-list-files";
 
 const LineSection = ({
