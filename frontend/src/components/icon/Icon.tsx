@@ -1,16 +1,41 @@
 import classNames from "classnames";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { iconFileNames, type IconsLisType } from "./icons-list-files";
 
 type IconProps = {
   name: IconsLisType;
+  tooltip?: boolean;
   className?: string;
 };
 
-export const Icon = ({ name, className, ...props }: IconProps) => {
+export const Icon = ({
+  tooltip = false,
+  name,
+  className,
+  ...props
+}: IconProps) => {
   const ComponentToRender = iconFileNames[name].icon;
+  const comp = (
+    <ComponentToRender {...props} className={classNames(className)} />
+  );
 
-  return <ComponentToRender {...props} className={classNames(className)} />;
+  if (tooltip) {
+    return (
+      <Tooltip>
+        <TooltipTrigger>{comp}</TooltipTrigger>
+        <TooltipContent>
+          <p>{name}</p>
+        </TooltipContent>
+      </Tooltip>
+    );
+  }
+
+  return comp;
 };
 
 export const UpDownArrowIcon = ({

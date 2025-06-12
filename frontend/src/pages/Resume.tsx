@@ -1,4 +1,5 @@
-import { experienceItems } from "@/data/text";
+import { Icon } from "@/components/icon";
+import { experienceItems, workHistoryText } from "@/data/text";
 import type { WorkExperience } from "@/lib/types";
 
 const WItem = ({
@@ -13,12 +14,21 @@ const WItem = ({
   return (
     <li>
       <h2>{jobTitle}</h2>
-      <p>{employer}</p>
-      <p>{startDate}</p>
+      <span>
+        {employer}/{startDate}
+      </span>
       <p>{endDate}</p>
-      <p>{description}</p>
+      {description.map((item, idx) => (
+        <p key={`${startDate}-${idx}`}>{item}</p>
+      ))}
       <p>{url}</p>
-      <p>{tools}</p>
+      <ul className="flex">
+        {tools.map((item, idx) => (
+          <li key={`${startDate}-${item}-${idx}`}>
+            <Icon tooltip name={item} />
+          </li>
+        ))}
+      </ul>
     </li>
   );
 };
@@ -26,9 +36,9 @@ const WItem = ({
 export const Resume = () => {
   return (
     <div className="h-screen overflow-hidden border border-amber-500 py-18">
-      <h1>This is my resume page</h1>
+      <h1>{workHistoryText.title}</h1>
       <div>
-        <p>stuf goes here</p>
+        <p>{workHistoryText.description}</p>
         <ul>
           {experienceItems.map((item, idx) => {
             return <WItem key={`${item}--${idx}`} {...item} />;
