@@ -203,7 +203,7 @@ func main() {
 		}
 
 		c.SetCookie(TOKEN_NAME, apiToken, 3600, "/", "", secure, true)
-		c.JSON(http.StatusOK, gin.H{"message": "logged in", "role": "admin"})
+		c.JSON(http.StatusOK, gin.H{"message": "logged in"})
 	})
 
 	api.GET("/now", func(c *gin.Context) {
