@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"regexp"
+	"strings"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -175,15 +177,23 @@ func main() {
 			return
 		}
 
+		input.Username = strings.TrimSpace(input.Username)
+		input.Password = strings.TrimSpace(input.Password)
+
+		if input.Username == "" || input.Password == "" {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Username and password are required"})
+			return
+		}
+
+		if matched := regexp.MustCompile(`^[a-zA-Z0-9_]+$`).MatchString(input.Username); !matched {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid characters in username"})
+			return
+		}
+
 		// validate the username and password
 		hashedUser := os.Getenv("ADMIN_USERNAME_HASH")
 		hashedPass := os.Getenv("ADMIN_PASSWORD_HASH")
 		apiToken := os.Getenv("API_TOKEN")
-
-		fmt.Printf("u:%s | p:%s\n", input.Username, input.Password)
-		fmt.Printf("u:%s | p:%s\n", input.Username, input.Password)
-		fmt.Printf("u:%s | p:%s\n", input.Username, input.Password)
-		fmt.Printf("uh:%s | ph:%s\n", hashedUser, hashedPass)
 
 		userErr := bcrypt.CompareHashAndPassword([]byte(hashedUser), []byte(input.Username))
 		passErr := bcrypt.CompareHashAndPassword([]byte(hashedPass), []byte(input.Password))
