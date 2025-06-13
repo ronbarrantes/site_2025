@@ -127,7 +127,7 @@ func main() {
 		log.Fatalf("failed to set trusted proxies: %v", err)
 	}
 
-	// CORS setup
+	//	CORS setup
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000", "http://localhost:3003"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
@@ -190,7 +190,6 @@ func main() {
 			return
 		}
 
-		// validate the username and password
 		hashedUser := os.Getenv("ADMIN_USERNAME_HASH")
 		hashedPass := os.Getenv("ADMIN_PASSWORD_HASH")
 		apiToken := os.Getenv("API_TOKEN")
@@ -204,7 +203,7 @@ func main() {
 		}
 
 		c.SetCookie(TOKEN_NAME, apiToken, 3600, "/", "", secure, true)
-		c.JSON(http.StatusOK, gin.H{"message": "logged in"})
+		c.JSON(http.StatusOK, gin.H{"message": "logged in", "role": "admin"})
 	})
 
 	api.GET("/now", func(c *gin.Context) {
@@ -219,6 +218,10 @@ func main() {
 	})
 
 	auth := api.Group("/", AuthMiddleware(os.Getenv("API_TOKEN")))
+
+	auth.GET("/me", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"role": "admin"})
+	})
 
 	auth.POST("/logout", func(c *gin.Context) {
 		c.SetCookie(TOKEN_NAME, "", 1, "/", "", secure, true)
