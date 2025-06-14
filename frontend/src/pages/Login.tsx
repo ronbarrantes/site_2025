@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { redirect } from "react-router";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -29,6 +29,7 @@ const formSchema = z.object({
 
 export function LoginForm() {
   const { setIsAuth } = useAuthStore();
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -57,7 +58,7 @@ export function LoginForm() {
     console.info("data", data.data);
     setIsAuth(true);
     form.reset();
-    redirect("/");
+    navigate("/");
   }
 
   return (
