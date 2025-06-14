@@ -29,7 +29,7 @@ const WItem = ({
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-fuchsia-700 underline hover:no-underline dark:text-fuchsia-400"
+              className="font-semibold text-cyan-600 underline hover:no-underline dark:text-cyan-400"
             >
               {employer}
             </a>
@@ -50,7 +50,7 @@ const WItem = ({
         <ul className="ml-2 flex gap-3">
           {tools.map((item, idx) => (
             <li key={`${startDate}-${item}-${idx}`}>
-              <Icon tooltip name={item} />
+              <Icon tooltip name={item} className="size-6" />
             </li>
           ))}
         </ul>

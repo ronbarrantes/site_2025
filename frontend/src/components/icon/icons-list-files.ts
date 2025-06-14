@@ -1,3 +1,4 @@
+// eslint-disable-next-line simple-import-sort/imports
 import { AiOutlineClose, AiOutlineWarning } from "react-icons/ai";
 import { BsChevronLeft, BsLightningCharge } from "react-icons/bs";
 import {
@@ -31,6 +32,7 @@ import {
   SiCplusplus,
   SiCss3,
   SiFacebook,
+  SiGit,
   SiGoland,
   SiHtml5,
   SiJavascript,
@@ -130,6 +132,7 @@ export const iconFileNames = {
   kotlin: { icon: SiKotlin },
   cpp: { icon: SiCplusplus },
   java: { icon: FaJava },
+  git: { icon: SiGit },
   // knockout: { icon: ___knockout___ },
   // fluentui: { icon: Flue },
 };

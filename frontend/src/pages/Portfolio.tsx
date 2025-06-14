@@ -1,7 +1,7 @@
 import classNames from "classnames";
 
 import { Icon } from "@/components/icon";
-import { portfolioItems } from "@/data/text";
+import { portfolioItems, portfolioText } from "@/data/text";
 import type { PortfolioItem } from "@/lib/types";
 
 const PItem = ({
@@ -36,7 +36,7 @@ const PItem = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon name="github" />
+            <Icon name="git" className="size-5" />
             github
           </a>
         )}
@@ -48,7 +48,7 @@ const PItem = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon name="link" />
+            <Icon name="link" className="size-5" />
             {link.label}
           </a>
         )}
@@ -58,7 +58,7 @@ const PItem = ({
         <ul className="ml-2 flex gap-3">
           {tools.map((item, idx) => (
             <li key={`${name}-${item}-${idx}`}>
-              <Icon tooltip name={item} />
+              <Icon className="size-6" tooltip name={item} />
             </li>
           ))}
         </ul>
@@ -71,7 +71,8 @@ export const Portfolio = () => {
   return (
     <div className="flex h-screen flex-col gap-3 overflow-hidden overflow-y-scroll pt-18 pb-10">
       <div className="mx-8 flex flex-col gap-3">
-        <h1>This is my portfolio page</h1>
+        <h1>{portfolioText.title}</h1>
+        <p>{portfolioText.description}</p>
       </div>
       <ul className="flex flex-col gap-3 md:flex-row md:flex-wrap md:gap-0">
         {portfolioItems.map((item, idx) => {
