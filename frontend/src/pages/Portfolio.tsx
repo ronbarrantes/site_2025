@@ -2,13 +2,9 @@ import { portfolioItems } from "@/data/text";
 import type { PortfolioItem } from "@/lib/types";
 
 const PItem = ({
-  name, //: string;
-  description, //: string[];
-  dateAdded, //?: string;
-  github, //?: string;
-  link, //?: Link;
-  tags, //?: string[];
-  tools, //: IconsLisType[];
+  name, description, 
+  dateAdded, github, 
+  link, tags, tools,
 }: PortfolioItem) => {
   return (
     <li>
@@ -32,7 +28,7 @@ export const Portfolio = () => {
       <h1>This is my portfolio page</h1>
       <ul>
         {portfolioItems.map((item, idx) => {
-          return <PItem key={`${item.name}--${idx}}`} {...item} />;
+          return <PItem key={`${item.name}--${idx}`} {...item} />;
         })}
       </ul>
     </div>
