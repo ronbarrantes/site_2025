@@ -22,14 +22,16 @@ const WItem = ({
       )}
     >
       <div className="flex flex-col gap-2">
-        <h2 className="font-semibold">{jobTitle}</h2>
+        <h2 className="font-semibold text-cyan-500 dark:text-cyan-400">
+          {jobTitle}
+        </h2>
         <div className="flex gap-2">
           {url ? (
             <a
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-cyan-600 underline hover:no-underline dark:text-cyan-400"
+              className="font-semibold text-cyan-500 underline hover:no-underline dark:text-cyan-400"
             >
               {employer}
             </a>

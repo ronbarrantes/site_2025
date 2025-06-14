@@ -268,6 +268,11 @@ export const portfolioItems: PortfolioItem[] = [
   },
 ];
 
+export const contactText = {
+  title: "Contact me",
+  description: `Do you want to get a hold of me? Just use the buttons below to go to my socials`,
+};
+
 export const mediaLinks: Link[] = [
   {
     label: "linkedin",

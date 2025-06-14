@@ -20,7 +20,9 @@ const PItem = ({
         className
       )}
     >
-      <h2>{name}</h2>
+      <h2 className="font-semibold text-fuchsia-600 dark:text-fuchsia-400">
+        {name}
+      </h2>
       <span>{description}</span>
       <div className="flex flex-1 flex-col gap-2">
         {description.map((item, idx) => (
@@ -32,7 +34,7 @@ const PItem = ({
         {github && (
           <a
             href={github}
-            className="flex items-center gap-2 font-semibold text-fuchsia-800 underline hover:no-underline dark:text-fuchsia-400"
+            className="flex items-center gap-2 font-semibold text-fuchsia-600 underline hover:no-underline dark:text-fuchsia-400"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -44,7 +46,7 @@ const PItem = ({
         {link && (
           <a
             href={link.href}
-            className="flex items-center gap-2 font-semibold text-fuchsia-800 underline hover:no-underline dark:text-fuchsia-400"
+            className="flex items-center gap-2 font-semibold text-fuchsia-600 underline hover:no-underline dark:text-fuchsia-400"
             target="_blank"
             rel="noopener noreferrer"
           >
