@@ -132,14 +132,14 @@ const MainNav = ({
   setIsOpen: (isOpen: boolean) => void;
 }) => {
   return (
-    <nav className={classNames("mx-2 border border-red-500")}>
+    <nav className={classNames("mx-2")}>
       <Button
-        className="block md:hidden"
+        className="m-0 block h-full w-fit bg-transparent p-0 text-slate-950 shadow-none hover:bg-transparent hover:text-fuchsia-700 md:hidden dark:bg-transparent dark:text-white dark:hover:text-fuchsia-400"
         onClick={() => {
           setIsOpen(true);
         }}
       >
-        <Icon name="hamburger" />
+        <Icon name="hamburger" className="m-0 size-8 p-0" />
       </Button>
       <Menu className="hidden items-center gap-2 align-middle md:flex md:flex-row" />
     </nav>
@@ -179,7 +179,7 @@ export const Header = ({ className }: { className: string }) => {
           className="mx-auto flex-col items-center *:border-red-200 *:py-5 *:text-center *:text-5xl"
         />
       </div>
-      <header className="glass xxxx container mx-auto flex items-center justify-between rounded-xl border-slate-950/5 p-1 pt-1.5 drop-shadow-xl dark:border-slate-50/10">
+      <header className="glass container mx-auto flex items-center justify-between rounded-xl border border-slate-950/5 p-1 pt-1.5 drop-shadow-xl dark:border-slate-50/10">
         <span>
           <CustomNavLink
             onMouseOver={() => {
