@@ -132,7 +132,6 @@ export const Home = () => {
   const nowData = data.now.get.data || [];
   const isLoading = data.now.get.isLoading;
   const { isAuth } = useAuthStore();
-
   return (
     <div className="block h-screen items-center justify-between gap-5 overflow-y-scroll pt-16 md:flex md:overflow-hidden">
       <div className="mb-8 h-fit w-full md:mb-10 md:w-1/3">

@@ -6,7 +6,7 @@ import {
 } from "@/lib/types";
 
 export const about: About = {
-  title: "",
+  title: "About me",
   description: [
     "I am an Engineer with a strong eye for design, an insatiable curiosity, and a passion for learning and personal growth.",
     "I have 6 years of development experience, 8 years working with JavaScript and Node, 5 year working with TypeScript, and over 10 years working in various aspects of tech.",
