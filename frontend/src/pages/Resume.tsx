@@ -3,13 +3,13 @@ import { experienceItems, workHistoryText } from "@/data/text";
 import type { WorkExperience } from "@/lib/types";
 
 const WItem = ({
-  employer, //: string;
-  jobTitle, //: string;
-  startDate, //: string;
-  endDate, //?: string;
-  description, //: string[];
-  url, //?: string;
-  tools, //: IconsLisType[];
+  employer,
+  jobTitle,
+  startDate,
+  endDate,
+  description,
+  url,
+  tools,
 }: WorkExperience) => {
   return (
     <li>
@@ -17,11 +17,20 @@ const WItem = ({
       <span>
         {employer}/{startDate}
       </span>
-      <p>{endDate}</p>
+      {endDate && <p>{endDate}</p>}
       {description.map((item, idx) => (
         <p key={`${startDate}-${idx}`}>{item}</p>
       ))}
-      <p>{url}</p>
+      {url && (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 underline"
+        >
+          {url}
+        </a>
+      )}
       <ul className="flex">
         {tools.map((item, idx) => (
           <li key={`${startDate}-${item}-${idx}`}>
@@ -41,7 +50,12 @@ export const Resume = () => {
         <p>{workHistoryText.description}</p>
         <ul>
           {experienceItems.map((item, idx) => {
-            return <WItem key={`${item}--${idx}`} {...item} />;
+            return (
+              <WItem
+                key={`${item.employer}-${item.jobTitle}-${idx}`}
+                {...item}
+              />
+            );
           })}
         </ul>
       </div>
