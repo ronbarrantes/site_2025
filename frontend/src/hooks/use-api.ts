@@ -97,7 +97,6 @@ export const useAuthStatus = () => {
     retry: false,
     queryFn: async () => {
       const res = await loginApi.me();
-      console.log("RES--->", res);
       return res.data;
     },
   });
@@ -127,6 +126,7 @@ const useNow = () => {
   const postNow = useMutation({
     mutationFn: nowApi.post,
     onSuccess: (resData) => {
+      queryClient.invalidateQueries({ queryKey: [queryKeys.NOW] });
       console.info("SUCCESS", resData);
     },
 
@@ -139,6 +139,7 @@ const useNow = () => {
   const deleteNow = useMutation({
     mutationFn: nowApi.delete,
     onSuccess: (resData) => {
+      queryClient.invalidateQueries({ queryKey: [queryKeys.NOW] });
       console.info("SUCCESS", resData);
     },
 
