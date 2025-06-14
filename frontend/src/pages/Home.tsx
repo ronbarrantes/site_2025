@@ -1,8 +1,18 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import clx from "classnames";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Sheet,
   SheetClose,
@@ -15,6 +25,15 @@ import {
 } from "@/components/ui/sheet";
 import { useRoutes } from "@/hooks/use-api";
 import { formatDate } from "@/utils/time";
+
+const nowSchema = z.object({
+  title: z.string().min(2, {
+    message: "Title least 2 characters.",
+  }),
+  desc: z.string().min(2, {
+    message: "Description must be at least 2 characters.",
+  }),
+});
 
 const NowItem = ({
   className,
@@ -30,35 +49,76 @@ const NowItem = ({
   );
 };
 
-export function SheetDemo() {
+export function SheetAddItem() {
+  const { data } = useRoutes();
+  const form = useForm<z.infer<typeof nowSchema>>({
+    resolver: zodResolver(nowSchema),
+    defaultValues: {
+      title: "",
+      desc: "",
+    },
+  });
+
+  async function onSubmit(values: z.infer<typeof nowSchema>) {
+    const body = {
+      title: values.title,
+      desc: values.desc,
+    };
+
+    await data.now.post.mutateAsync({
+      body,
+    });
+
+    form.reset();
+  }
+
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">Open</Button>
+        <Button variant="outline">Add Item</Button>
       </SheetTrigger>
       <SheetContent>
-        <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
-          <SheetDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
-          </SheetDescription>
-        </SheetHeader>
-        <div className="grid flex-1 auto-rows-min gap-6 px-4">
-          <div className="grid gap-3">
-            <Label htmlFor="sheet-demo-name">Name</Label>
-            <Input id="sheet-demo-name" defaultValue="Pedro Duarte" />
-          </div>
-          <div className="grid gap-3">
-            <Label htmlFor="sheet-demo-username">Username</Label>
-            <Input id="sheet-demo-username" defaultValue="@peduarte" />
-          </div>
-        </div>
-        <SheetFooter>
-          <Button type="submit">Save changes</Button>
-          <SheetClose asChild>
-            <Button variant="outline">Close</Button>
-          </SheetClose>
-        </SheetFooter>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <SheetHeader>
+              <SheetTitle>Add a now item</SheetTitle>
+              <SheetDescription>What am you up to right now:</SheetDescription>
+            </SheetHeader>
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input placeholder="title..." {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="desc"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Input placeholder="description..." {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <SheetFooter>
+              <Button type="submit">Save changes</Button>
+              <SheetClose asChild>
+                <Button variant="outline">Close</Button>
+              </SheetClose>
+            </SheetFooter>
+          </form>
+        </Form>
       </SheetContent>
     </Sheet>
   );
@@ -77,6 +137,7 @@ export const Home = () => {
       </div>
       <div className="h-screen md:w-2/3 md:overflow-hidden md:overflow-y-scroll md:pt-8 lg:w-7/12">
         <h2 className="mb-4">What I've been up to:</h2>
+        <SheetAddItem />
         {isLoading ? (
           <span>LOADING ....</span>
         ) : (
