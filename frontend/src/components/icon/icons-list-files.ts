@@ -3,6 +3,7 @@ import { BsChevronLeft, BsLightningCharge } from "react-icons/bs";
 import {
   FaFacebook,
   FaGithub,
+  FaHamburger,
   FaLinkedin,
   FaReact,
   FaRegFileAlt,
@@ -67,6 +68,7 @@ export const iconFileNames = {
   duck: { icon: GiPlasticDuck },
   faceboon: { icon: FaFacebook },
   github: { icon: FaGithub },
+  hamburger: { icon: FaHamburger },
   home: { icon: FiHome },
   info: { icon: MdOutlineInfo },
   linkedin: { icon: FaLinkedin },

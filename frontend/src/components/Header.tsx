@@ -6,6 +6,8 @@ import { NavLink, type NavLinkProps } from "react-router";
 import type { IconLink } from "@/lib/types";
 import { useLinksStore } from "@/store/use-links";
 import { Logo } from "./logo/Logo";
+import { Button } from "./ui/button";
+import { Icon } from "./icon";
 import { ModeToggle } from "./mode-toggle";
 
 type CustomLinkType = {
@@ -34,8 +36,8 @@ const CustomNavLink = ({
       onClick={handleClick}
       to={to}
       className={classNames(
-        window.location.pathname === to && "border-b-4",
-        "border-black transition-all group-hover:border-b-4",
+        window.location.pathname === to && "border-b-8 md:border-b-4",
+        "border-black transition-all group-hover:border-b-8 group-hover:md:border-b-4",
         className
       )}
       {...props}
@@ -47,6 +49,7 @@ const CustomNavLink = ({
 
 const LinkItem = ({
   to,
+  setClose,
   pageIdx,
   className,
   children,
@@ -54,10 +57,11 @@ const LinkItem = ({
   to: string;
   pageIdx: number;
   className?: string;
+  setClose?: () => void;
   children: React.ReactNode;
 }) => {
   return (
-    <li className="group p-1">
+    <li onClick={setClose} className="group p-1">
       <CustomNavLink to={to} pageIdx={pageIdx} className={className}>
         {children}
       </CustomNavLink>
@@ -65,29 +69,79 @@ const LinkItem = ({
   );
 };
 
-const MainNav = () => {
+const Menu = ({
+  setClose,
+  className,
+}: {
+  setClose?: () => void;
+  className?: string;
+}) => {
   return (
-    <nav className="mx-2">
-      <ul className="flex items-center gap-2 align-middle">
-        <LinkItem pageIdx={1} className="border-slate-500" to="/">
-          <span>Home</span>
-        </LinkItem>
-        <LinkItem pageIdx={2} className="border-green-500" to="/about">
-          About
-        </LinkItem>
-        <LinkItem pageIdx={3} className="border-cyan-500" to="/resume">
-          Resume
-        </LinkItem>
-        <LinkItem pageIdx={4} className="border-fuchsia-500" to="/portfolio">
-          Portfolio
-        </LinkItem>
-        <LinkItem pageIdx={5} className="border-lime-500" to="/contact">
-          Contact
-        </LinkItem>
-        <li>
-          <ModeToggle />
-        </li>
-      </ul>
+    <ul className={className}>
+      <LinkItem
+        pageIdx={1}
+        setClose={setClose}
+        className="border-slate-500"
+        to="/"
+      >
+        <span>Home</span>
+      </LinkItem>
+      <LinkItem
+        pageIdx={2}
+        setClose={setClose}
+        className="border-green-500"
+        to="/about"
+      >
+        About
+      </LinkItem>
+      <LinkItem
+        setClose={setClose}
+        pageIdx={3}
+        className="border-cyan-500"
+        to="/resume"
+      >
+        Resume
+      </LinkItem>
+      <LinkItem
+        setClose={setClose}
+        pageIdx={4}
+        className="border-fuchsia-500"
+        to="/portfolio"
+      >
+        Portfolio
+      </LinkItem>
+      <LinkItem
+        setClose={setClose}
+        pageIdx={5}
+        className="border-lime-500"
+        to="/contact"
+      >
+        Contact
+      </LinkItem>
+      <li>
+        <ModeToggle />
+      </li>
+    </ul>
+  );
+};
+
+const MainNav = ({
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}) => {
+  return (
+    <nav className={classNames("mx-2 border border-red-500")}>
+      <Button
+        className="block md:hidden"
+        onClick={() => {
+          setIsOpen(true);
+        }}
+      >
+        <Icon name="hamburger" />
+      </Button>
+      <Menu className="hidden items-center gap-2 align-middle md:flex md:flex-row" />
     </nav>
   );
 };
@@ -102,10 +156,30 @@ const logoColors = [
 
 export const Header = ({ className }: { className: string }) => {
   const [logoColorIdx, setLogoColorIdx] = useState<number>(3);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const setClose = () => setIsOpen(false);
 
   return (
-    <div className={classNames("px-2 pt-1", className)}>
-      <header className="glass container mx-auto flex items-center justify-between rounded-xl border border-slate-950/5 p-1 pt-1.5 drop-shadow-xl dark:border-slate-50/10">
+    <div className={classNames("border-blue-500 px-2 pt-1", className)}>
+      <div
+        className={classNames(
+          "glass absolute top-0 left-0 z-50 h-screen w-screen flex-col md:hidden",
+          isOpen ? "flex" : "hidden"
+        )}
+      >
+        <Button
+          onClick={setClose}
+          className="mx-auto my-5 size-20 bg-transparent text-slate-950 shadow-none hover:bg-transparent hover:text-fuchsia-700 dark:text-white dark:hover:text-fuchsia-400"
+        >
+          <Icon name="close" className="size-10 h-24 w-24" />
+        </Button>
+        <Menu
+          setClose={setClose}
+          className="mx-auto flex-col items-center *:border-red-200 *:py-5 *:text-center *:text-5xl"
+        />
+      </div>
+      <header className="glass xxxx container mx-auto flex items-center justify-between rounded-xl border-slate-950/5 p-1 pt-1.5 drop-shadow-xl dark:border-slate-50/10">
         <span>
           <CustomNavLink
             onMouseOver={() => {
@@ -127,7 +201,7 @@ export const Header = ({ className }: { className: string }) => {
             />
           </CustomNavLink>
         </span>
-        <MainNav />
+        <MainNav isOpen={isOpen} setIsOpen={setIsOpen} />
       </header>
     </div>
   );
