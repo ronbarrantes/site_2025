@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"regexp"
+	"strings"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -125,7 +127,7 @@ func main() {
 		log.Fatalf("failed to set trusted proxies: %v", err)
 	}
 
-	// CORS setup
+	//	CORS setup
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000", "http://localhost:3003"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
@@ -175,15 +177,22 @@ func main() {
 			return
 		}
 
-		// validate the username and password
+		input.Username = strings.TrimSpace(input.Username)
+		input.Password = strings.TrimSpace(input.Password)
+
+		if input.Username == "" || input.Password == "" {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Username and password are required"})
+			return
+		}
+
+		if matched := regexp.MustCompile(`^[a-zA-Z0-9_]+$`).MatchString(input.Username); !matched {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid characters in username"})
+			return
+		}
+
 		hashedUser := os.Getenv("ADMIN_USERNAME_HASH")
 		hashedPass := os.Getenv("ADMIN_PASSWORD_HASH")
 		apiToken := os.Getenv("API_TOKEN")
-
-		fmt.Printf("u:%s | p:%s\n", input.Username, input.Password)
-		fmt.Printf("u:%s | p:%s\n", input.Username, input.Password)
-		fmt.Printf("u:%s | p:%s\n", input.Username, input.Password)
-		fmt.Printf("uh:%s | ph:%s\n", hashedUser, hashedPass)
 
 		userErr := bcrypt.CompareHashAndPassword([]byte(hashedUser), []byte(input.Username))
 		passErr := bcrypt.CompareHashAndPassword([]byte(hashedPass), []byte(input.Password))
@@ -209,6 +218,10 @@ func main() {
 	})
 
 	auth := api.Group("/", AuthMiddleware(os.Getenv("API_TOKEN")))
+
+	auth.GET("/me", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"role": "admin"})
+	})
 
 	auth.POST("/logout", func(c *gin.Context) {
 		c.SetCookie(TOKEN_NAME, "", 1, "/", "", secure, true)
@@ -277,6 +290,48 @@ func main() {
 
 		}
 		c.JSON(http.StatusOK, now)
+	})
+
+	auth.PUT("/now/:id", func(c *gin.Context) {
+		id := c.Param("id")
+
+		var input struct {
+			Title *string `json:"title"`
+			Desc  *string `json:"desc"`
+		}
+
+		if c.ContentType() != "application/json" {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Expected application/json"})
+			return
+		}
+
+		if err := c.ShouldBindJSON(&input); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "Invalid input",
+			})
+			return
+		}
+
+		updates := make(map[string]interface{})
+
+		if input.Title != nil {
+			updates["title"] = *input.Title
+		}
+		if input.Desc != nil {
+			updates["desc"] = *input.Desc
+		}
+
+		if len(updates) == 0 {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Nothing to update"})
+			return
+		}
+
+		if err := db.Model(&Now{}).Where("id = ?", id).Updates(updates).Error; err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update Now entry"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"message": "Entry updated"})
 	})
 
 	auth.DELETE("/now/:id", func(c *gin.Context) {

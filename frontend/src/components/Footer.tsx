@@ -2,8 +2,11 @@ import classNames from "classnames";
 import { toast } from "sonner";
 
 import { Icon } from "@/components/icon";
+import { mediaLinks } from "@/data/text";
 import { useClock } from "@/hooks/use-clock";
-import { useLinksStore } from "@/hooks/use-links";
+import type { Link } from "@/lib/types";
+import { useLinksStore } from "@/store/use-links";
+import type { IconsLisType } from "./icon/icons-list-files";
 
 const LineSection = ({
   direction,
@@ -29,6 +32,25 @@ const LineSection = ({
   </div>
 );
 
+const FooterMediaItem = ({
+  label,
+  href,
+  isLast,
+}: Link & { isLast: boolean; className?: string }) => {
+  return (
+    <>
+      <a
+        className={classNames("mx-1", isLast && "mr-0")}
+        href={href}
+        target="_blank"
+      >
+        <Icon tooltip name={label as IconsLisType} />
+      </a>
+    </>
+  );
+};
+
+//{!isLast && <span className="text-slate-400 dark:text-slate-600">|</span>}
 export const Footer = ({ className }: { className: string }) => {
   const { iconLink, pageIdx } = useLinksStore();
   const { date, time } = useClock();
@@ -51,38 +73,42 @@ export const Footer = ({ className }: { className: string }) => {
           </LineSection>
           <LineSection
             direction="left"
-            className="bg-slate-300 after:bg-slate-300 dark:bg-slate-800 dark:after:bg-slate-800"
+            className="bg-slate-300 after:bg-slate-300 dark:bg-slate-700 dark:after:bg-slate-700"
           >
             <button onClick={() => toast("QUACK!")}>
-              <Icon className="ml-2" name="duck" />
+              <Icon tooltip asChild className="ml-2" name="duck" />
             </button>
+          </LineSection>
+          <LineSection className="flex gap-2">
+            {mediaLinks.map((item, idx) => {
+              const isLast = mediaLinks.length - 1 === idx;
+              return (
+                <FooterMediaItem
+                  key={`footer-${item}--${idx}`}
+                  {...item}
+                  isLast={isLast}
+                />
+              );
+            })}
+            <span className="text-slate-400 dark:text-slate-600">
+              <Icon className="rotate-180" name="chevronLeft" />
+            </span>
           </LineSection>
         </div>
 
         <div className="flex">
-          <LineSection className="flex gap-2">
-            <a href="https://github.com/ronbarrantes" target="_blank">
-              <Icon name="github" />
-            </a>
-            <span className="text-slate-400 dark:text-slate-600">|</span>
-            <a
-              className="mr-0"
-              href="https://www.linkedin.com/in/ronbarrantes"
-              target="_blank"
-            >
-              <Icon name="linkedin" />
-            </a>
-          </LineSection>
           <LineSection
             direction="right"
-            className="bg-cyan-300 before:bg-cyan-300 dark:bg-cyan-800 dark:before:bg-cyan-800"
+            className="gap-2 bg-cyan-300 before:bg-cyan-300 dark:bg-cyan-800 dark:before:bg-cyan-800"
           >
+            <Icon name="clock" />
             <span className="mr-2">{time}</span>
           </LineSection>
           <LineSection
             direction="right"
-            className="hidden bg-fuchsia-300 before:bg-fuchsia-300 sm:flex dark:bg-fuchsia-800 dark:before:bg-fuchsia-800"
+            className="hidden gap-2 bg-fuchsia-300 before:bg-fuchsia-300 sm:flex dark:bg-fuchsia-800 dark:before:bg-fuchsia-800"
           >
+            <Icon name="calendar" />
             <span>{date}</span>
           </LineSection>
         </div>
