@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { redirect } from "react-router";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -13,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { loginApi, useAuthStatus } from "@/hooks/use-api";
+import { loginApi } from "@/hooks/use-api";
 import { useAuthStore } from "@/store/use-auth";
 import { tryCatch } from "@/utils/try-catch";
 
@@ -56,6 +57,7 @@ export function LoginForm() {
     console.info("data", data.data);
     setIsAuth(true);
     form.reset();
+    redirect("/");
   }
 
   return (
@@ -95,6 +97,7 @@ export function LoginForm() {
 
 const LogOutButton = () => {
   const { setIsAuth } = useAuthStore();
+
   return (
     <Button
       onClick={async () => {
@@ -115,14 +118,13 @@ const LogOutButton = () => {
 };
 
 export const Login = () => {
-  const { isAuth, setIsAuth } = useAuthStore();
-  const authStatus = useAuthStatus();
+  const { isAuth } = useAuthStore();
 
-  const data = authStatus.me.get.data;
-  const error = authStatus.me.get.error;
-
-  if (error) console.warn(error);
-  if (data) setIsAuth(true);
-
-  return <div>{isAuth ? <LogOutButton /> : <LoginForm />}</div>;
+  return (
+    <div className="h-screen overflow-hidden py-18">
+      <div className="flex flex-col gap-3">
+        <div>{isAuth ? <LogOutButton /> : <LoginForm />}</div>
+      </div>
+    </div>
+  );
 };
