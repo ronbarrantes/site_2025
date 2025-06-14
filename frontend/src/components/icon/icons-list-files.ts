@@ -3,13 +3,12 @@ import { BsChevronLeft, BsLightningCharge } from "react-icons/bs";
 import {
   FaFacebook,
   FaGithub,
-  FaHamburger,
   FaLinkedin,
   FaReact,
   FaRegFileAlt,
 } from "react-icons/fa";
 import { FiCalendar, FiClock, FiCpu, FiHome } from "react-icons/fi";
-import { GiPlasticDuck } from "react-icons/gi";
+import { GiHamburgerMenu, GiPlasticDuck } from "react-icons/gi";
 import { LuBriefcase, LuContact, LuSettings } from "react-icons/lu";
 import {
   MdArrowForward,
@@ -68,7 +67,7 @@ export const iconFileNames = {
   duck: { icon: GiPlasticDuck },
   faceboon: { icon: FaFacebook },
   github: { icon: FaGithub },
-  hamburger: { icon: FaHamburger },
+  hamburger: { icon: GiHamburgerMenu },
   home: { icon: FiHome },
   info: { icon: MdOutlineInfo },
   linkedin: { icon: FaLinkedin },
