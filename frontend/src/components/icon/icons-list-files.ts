@@ -5,7 +5,9 @@ import {
   FaGithub,
   FaLinkedin,
   FaReact,
+  FaLink,
   FaRegFileAlt,
+  FaJava,
 } from "react-icons/fa";
 import { FiCalendar, FiClock, FiCpu, FiHome } from "react-icons/fi";
 import { GiHamburgerMenu, GiPlasticDuck } from "react-icons/gi";
@@ -20,17 +22,21 @@ import {
   MdRefresh,
   MdRemove,
 } from "react-icons/md";
-import { RiNextjsFill } from "react-icons/ri";
+import { RiCopilotFill, RiNextjsFill } from "react-icons/ri";
 import {
   SiAdobeillustrator,
   SiAdobeindesign,
   SiAdobephotoshop,
   SiAdobepremierepro,
+  SiCplusplus,
   SiCss3,
   SiFacebook,
+  SiGoland,
   SiHtml5,
   SiJavascript,
   SiJest,
+  SiJira,
+  SiKotlin,
   SiMocha,
   SiMysql,
   SiPlanetscale,
@@ -50,7 +56,11 @@ import {
   SiVite,
   SiWordpress,
 } from "react-icons/si";
-import { TbBrandAzure, TbBrandReactNative } from "react-icons/tb";
+import {
+  TbBrandAzure,
+  TbBrandReactNative,
+  TbBrandTypescript,
+} from "react-icons/tb";
 
 export const iconFileNames = {
   about: { icon: MdOutlineInfo },
@@ -70,6 +80,7 @@ export const iconFileNames = {
   hamburger: { icon: GiHamburgerMenu },
   home: { icon: FiHome },
   info: { icon: MdOutlineInfo },
+  link: { icon: FaLink },
   linkedin: { icon: FaLinkedin },
   none: { icon: MdBlock },
   portfolio: { icon: LuBriefcase },
@@ -112,6 +123,13 @@ export const iconFileNames = {
   vercel: { icon: SiVercel },
   vite: { icon: SiVite },
   wordpress: { icon: SiWordpress },
+
+  golang: { icon: SiGoland },
+  jira: { icon: SiJira },
+  copilot: { icon: RiCopilotFill },
+  kotlin: { icon: SiKotlin },
+  cpp: { icon: SiCplusplus },
+  java: { icon: FaJava },
   // knockout: { icon: ___knockout___ },
   // fluentui: { icon: Flue },
 };

@@ -67,7 +67,6 @@ export const Resume = () => {
         <p>{workHistoryText.description}</p>
       </div>
       <div>
-        {/*        <ul className="flex w-full flex-col flex-wrap gap-8 border border-red-600 md:flex-row md:gap-0">*/}
         <ul className="flex flex-col gap-3 md:flex-row md:flex-wrap md:gap-0">
           {experienceItems.map((item, idx) => {
             return (
