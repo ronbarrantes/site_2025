@@ -18,9 +18,11 @@ export const useAuthStore = create<AuthStore>()(
     (set) => ({
       isAuth: false,
       editable: false,
-      setIsAuth: (isAuth) => set({ isAuth }),
+      setIsAuth: (isAuth) =>
+        set((state) =>
+          isAuth ? { isAuth } : { isAuth, editable: false }
+        ),
       setEditable: (editable) => set({ editable }),
-    }),
     { name: "AUTH_STORE" }
   )
 );
