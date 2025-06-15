@@ -72,7 +72,13 @@ const nowApi = {
     });
   },
 
-  put: async ({ body, id }: { id: number; body: NowData }) => {
+  put: async ({
+    body,
+    id,
+  }: {
+    id: number;
+    body: Pick<NowData, "title" | "desc">;
+  }) => {
     return await axios({
       method: "put",
       url: `${API_URL}/now/${id}`,
@@ -82,7 +88,7 @@ const nowApi = {
     });
   },
 
-  delete: async ({ id }: { id: number }) => {
+  delete: async (id: number) => {
     return await axios({
       method: "delete",
       url: `${API_URL}/now/${id}`,
@@ -136,6 +142,19 @@ const useNow = () => {
     },
   });
 
+  const putNow = useMutation({
+    mutationFn: nowApi.put,
+    onSuccess: (resData) => {
+      queryClient.invalidateQueries({ queryKey: [queryKeys.NOW] });
+      console.info("SUCCESS", resData);
+    },
+
+    onError: (resData) => {
+      const errorData = resData as AxiosError;
+      console.error("ERROR", errorData);
+    },
+  });
+
   const deleteNow = useMutation({
     mutationFn: nowApi.delete,
     onSuccess: (resData) => {
@@ -165,6 +184,7 @@ const useNow = () => {
         isPending: isPending,
       },
       post: postNow,
+      put: putNow,
       delete: deleteNow,
       refetch: refetchNow,
       getState,
@@ -176,7 +196,7 @@ export const useRoutes = () => {
   const { now } = useNow();
 
   return {
-    data: {
+    api: {
       now,
     },
 

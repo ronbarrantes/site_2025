@@ -5,6 +5,15 @@ import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
   Form,
   FormControl,
   FormField,
@@ -55,13 +64,60 @@ const NowItem = ({
   );
 };
 
-export function SheetAddItem() {
-  const { data } = useRoutes();
+export function EditDialog(item: { title: string; desc: string; id: number }) {
+  const { api } = useRoutes();
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Delete</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone. This will delet the Now Item with
+            title of:
+          </DialogDescription>
+          <DialogDescription className="font-semibold">
+            {item.title}
+          </DialogDescription>
+        </DialogHeader>
+        <DialogClose asChild>
+          <Button
+            type="button"
+            variant="destructive"
+            onClick={() => {
+              api.now.delete.mutate(item.id);
+            }}
+          >
+            Delete
+          </Button>
+        </DialogClose>
+        <DialogClose asChild>
+          <Button type="button">Close</Button>
+        </DialogClose>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+export function AddOrUpdateItem({
+  title,
+  desc,
+  id,
+  children,
+}: {
+  title?: string;
+  desc?: string;
+  id?: number;
+  children: React.ReactNode;
+}) {
+  const { api } = useRoutes();
   const form = useForm<z.infer<typeof nowSchema>>({
     resolver: zodResolver(nowSchema),
     defaultValues: {
-      title: "",
-      desc: "",
+      title: title ?? "",
+      desc: desc ?? "",
     },
   });
 
@@ -71,9 +127,8 @@ export function SheetAddItem() {
       desc: values.desc,
     };
 
-    await data.now.post.mutateAsync({
-      body,
-    });
+    if (id) await api.now.put.mutateAsync({ id, body });
+    else await api.now.post.mutateAsync({ body });
 
     form.reset();
   }
@@ -81,7 +136,7 @@ export function SheetAddItem() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">Add Item</Button>
+        <Button>{children}</Button>
       </SheetTrigger>
       <SheetContent>
         <Form {...form}>
@@ -89,11 +144,19 @@ export function SheetAddItem() {
             onSubmit={form.handleSubmit(onSubmit)}
             className="flex h-full flex-col space-y-8"
           >
-            <SheetHeader>
-              <SheetTitle>Add a now item</SheetTitle>
-              <SheetDescription>What am you up to right now:</SheetDescription>
-            </SheetHeader>
-
+            {id ? (
+              <SheetHeader>
+                <SheetTitle>Update the now item</SheetTitle>
+                <SheetDescription>What is your update:</SheetDescription>
+              </SheetHeader>
+            ) : (
+              <SheetHeader>
+                <SheetTitle>Add a now item</SheetTitle>
+                <SheetDescription>
+                  What am you up to right now:
+                </SheetDescription>
+              </SheetHeader>
+            )}
             <div className="flex flex-1 auto-rows-min flex-col gap-6 px-4">
               <FormField
                 control={form.control}
@@ -124,7 +187,9 @@ export function SheetAddItem() {
             </div>
 
             <SheetFooter>
-              <Button type="submit">Save changes</Button>
+              <SheetClose asChild>
+                <Button type="submit">Save changes</Button>
+              </SheetClose>
               <SheetClose asChild>
                 <Button variant="outline">Close</Button>
               </SheetClose>
@@ -137,9 +202,9 @@ export function SheetAddItem() {
 }
 
 export const Home = () => {
-  const { data } = useRoutes();
-  const nowData = data.now.get.data || [];
-  const isLoading = data.now.get.isLoading;
+  const { api } = useRoutes();
+  const nowData = api.now.get.data || [];
+  const isLoading = api.now.get.isLoading;
   const { isAuth } = useAuthStore();
   return (
     <div className="mx-auto block h-screen max-w-screen-lg items-center justify-between gap-5 overflow-y-scroll pt-16 md:flex md:overflow-hidden">
@@ -149,12 +214,13 @@ export const Home = () => {
       </div>
       <div className="h-screen md:w-2/3 md:overflow-hidden md:overflow-y-scroll md:pt-10 lg:w-7/12">
         <h2 className="mb-8 text-2xl md:mb-0">What I've been up to:</h2>
-        {isAuth && <SheetAddItem />}
+        {isAuth && <AddOrUpdateItem>Add Item</AddOrUpdateItem>}
         {isLoading ? (
-          <span>LOADING ....</span>
+          <span>LOADING...</span>
         ) : (
           <ul className="flex flex-col gap-5 pb-8 md:pt-8 md:pb-16">
             {nowData.map((item) => (
+              // Need to add something for when there are no items loaded
               <li key={item.id}>
                 <NowItem>
                   <h3 className="text-3xl font-semibold text-pink-500 dark:text-pink-400">
@@ -166,6 +232,19 @@ export const Home = () => {
                       {formatDate(item.created_at)}
                     </span>
                   </div>
+                  {isAuth && (
+                    <div className="flex gap-2">
+                      <AddOrUpdateItem
+                        id={item.id}
+                        title={item.title}
+                        desc={item.desc}
+                      >
+                        Edit
+                      </AddOrUpdateItem>
+
+                      <EditDialog {...item} />
+                    </div>
+                  )}
                 </NowItem>
               </li>
             ))}
