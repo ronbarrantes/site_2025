@@ -6,7 +6,7 @@ import {
 } from "@/lib/types";
 
 export const about: About = {
-  title: "",
+  title: "About me",
   description: [
     "I am an Engineer with a strong eye for design, an insatiable curiosity, and a passion for learning and personal growth.",
     "I have 6 years of development experience, 8 years working with JavaScript and Node, 5 year working with TypeScript, and over 10 years working in various aspects of tech.",
@@ -32,7 +32,15 @@ export const experienceItems: WorkExperience[] = [
       `Create a logging server that takes info and error logs from the Virewirx’s managing dashboard and writes them to local memory`,
       `Helped find, identify, and fix bugs with the current internal tooling`,
     ],
-    tools: ["react", "typescript", "tailwind", "python"],
+    tools: [
+      "react",
+      "typescript",
+      "tailwind",
+      "python",
+      "jira",
+      "golang",
+      "git",
+    ],
   },
   {
     employer: "VeroSkills",
@@ -56,6 +64,8 @@ export const experienceItems: WorkExperience[] = [
       "vercel",
       "stripe",
       "turborepo",
+      "github",
+      "git",
     ],
   },
 
@@ -78,6 +88,8 @@ export const experienceItems: WorkExperience[] = [
       "typescript",
       "azure",
       "jest",
+      "github",
+      "git",
     ],
   },
 
@@ -92,7 +104,16 @@ export const experienceItems: WorkExperience[] = [
       "Worked on the testing of multiple services the Azure Compute, Service Fabric, and Containers during Azure IaaS migration from their own internal tooling to MochaJS and PortalFx as Azure transitions from KnockoutJS to ReactJS.",
       "Contributed to Azure PortalFx, a library used for testing blades, controllers, and components at Azure",
     ],
-    tools: ["react", "mochajs", "typescript", "selenium", "azure"],
+    tools: [
+      "react",
+      "mochajs",
+      "typescript",
+      "selenium",
+      "azure",
+
+      "github",
+      "git",
+    ],
   },
 
   {
@@ -113,6 +134,8 @@ export const experienceItems: WorkExperience[] = [
       "rails",
       "postgresql",
       "redis",
+      "github",
+      "git",
     ],
   },
 
@@ -134,6 +157,8 @@ export const experienceItems: WorkExperience[] = [
       "indesign",
       "premierepro",
       "wordpress",
+      "github",
+      "git",
     ],
   },
 ];
@@ -155,7 +180,17 @@ export const portfolioItems: PortfolioItem[] = [
       "This is a project I’m creating for my family to help them review the questions commonly found on the U.S. citizenship exam.",
       "It gives the user 10 of the 100 questions in a multiple choice format",
     ],
-    tools: ["nextjs", "typescript", "tailwind", "vercel", "postgresql"],
+    tools: [
+      "nextjs",
+      "typescript",
+      "tailwind",
+      "vercel",
+      "postgresql",
+
+      "github",
+
+      "git",
+    ],
   },
   {
     name: "Game of Life",
@@ -167,7 +202,7 @@ export const portfolioItems: PortfolioItem[] = [
     description: [
       "An interpretation of the classic game of life, built with good old React, TypeScript, and TailwindCSS. It is hosted on Vercel.",
     ],
-    tools: ["react", "typescript", "tailwind", "vercel"],
+    tools: ["react", "typescript", "tailwind", "vercel", "github", "git"],
   },
 
   {
@@ -181,7 +216,16 @@ export const portfolioItems: PortfolioItem[] = [
       "This is a simple matching game that I made for my 4 year old son. He really enjoys playing it",
       "It is built with Vite's React, TypeScript, and TailwindCSS. It is hosted on Vercel.",
     ],
-    tools: ["react", "typescript", "tailwind", "vite", "vercel"],
+    tools: [
+      "react",
+      "typescript",
+      "tailwind",
+      "vite",
+      "vercel",
+
+      "github",
+      "git",
+    ],
   },
 
   {
@@ -202,6 +246,8 @@ export const portfolioItems: PortfolioItem[] = [
       "tailwind",
       "turborepo",
       "vercel",
+      "github",
+      "git",
     ],
   },
   {
@@ -210,9 +256,22 @@ export const portfolioItems: PortfolioItem[] = [
     description: [
       `This is the github to my personal portfolio site, the one you're currently on. It is built with React.js, Next.js, TypeScript, and TailwindCSS. It is hosted on Vercel.`,
     ],
-    tools: ["nextjs", "typescript", "react", "tailwind", "vercel"],
+    tools: [
+      "nextjs",
+      "typescript",
+      "react",
+      "tailwind",
+      "vercel",
+      "github",
+      "git",
+    ],
   },
 ];
+
+export const contactText = {
+  title: "Contact me",
+  description: `Do you want to get a hold of me? Just use the buttons below to go to my socials`,
+};
 
 export const mediaLinks: Link[] = [
   {

@@ -81,7 +81,7 @@ const Menu = ({
       <LinkItem
         pageIdx={1}
         setClose={setClose}
-        className="border-slate-500"
+        className="border-pink-500"
         to="/"
       >
         <span>Home</span>
@@ -134,7 +134,7 @@ const MainNav = ({
   return (
     <nav className={classNames("mx-2")}>
       <Button
-        className="m-0 block h-full w-fit bg-transparent p-0 text-slate-950 shadow-none hover:bg-transparent hover:text-fuchsia-700 md:hidden dark:bg-transparent dark:text-white dark:hover:text-fuchsia-400"
+        className="m-0 block h-full w-fit bg-transparent p-0 text-pink-950 shadow-none hover:bg-transparent hover:text-fuchsia-700 md:hidden dark:bg-transparent dark:text-white dark:hover:text-fuchsia-400"
         onClick={() => {
           setIsOpen(true);
         }}
@@ -147,7 +147,7 @@ const MainNav = ({
 };
 
 const logoColors = [
-  "group-hover:fill-slate-500 dark:group-hover:fill-slate-500",
+  "group-hover:fill-pink-500 dark:group-hover:fill-pink-500",
   "group-hover:fill-green-500 dark:group-hover:fill-green-500",
   "group-hover:fill-cyan-500 dark:group-hover:fill-cyan-500",
   "group-hover:fill-fuchsia-500 dark:group-hover:fill-fuchsia-500",
@@ -170,7 +170,7 @@ export const Header = ({ className }: { className: string }) => {
       >
         <Button
           onClick={setClose}
-          className="mx-auto my-5 size-20 bg-transparent text-slate-950 shadow-none hover:bg-transparent hover:text-fuchsia-700 dark:text-white dark:hover:text-fuchsia-400"
+          className="mx-auto my-5 size-20 bg-transparent text-pink-950 shadow-none hover:bg-transparent hover:text-fuchsia-700 dark:text-white dark:hover:text-fuchsia-400"
         >
           <Icon name="close" className="size-10 h-24 w-24" />
         </Button>
@@ -179,7 +179,7 @@ export const Header = ({ className }: { className: string }) => {
           className="mx-auto flex-col items-center *:border-red-200 *:py-5 *:text-center *:text-5xl"
         />
       </div>
-      <header className="glass container mx-auto flex items-center justify-between rounded-xl border border-slate-950/5 p-1 pt-1.5 drop-shadow-xl dark:border-slate-50/10">
+      <header className="glass container mx-auto flex items-center justify-between rounded-xl border border-pink-950/5 p-1 pt-1.5 drop-shadow-xl dark:border-pink-50/10">
         <span>
           <CustomNavLink
             onMouseOver={() => {
