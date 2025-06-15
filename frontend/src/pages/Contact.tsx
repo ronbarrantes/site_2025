@@ -8,7 +8,7 @@ const ContactItem = ({ href, label }: Link) => {
     <a
       href={href}
       target="_blank"
-      className="glass flex h-fit w-fit flex-col gap-5 rounded-3xl border border-slate-950/10 p-5 transition-all hover:!bg-lime-300 dark:border-white/10 hover:dark:!bg-lime-700"
+      className="glass flex h-fit w-fit flex-col gap-5 rounded-3xl border border-slate-950/10 p-5 transition-all hover:!bg-lime-500 hover:text-slate-950 dark:border-white/10 hover:dark:!bg-lime-400"
     >
       <Icon
         className="mx-auto size-20"

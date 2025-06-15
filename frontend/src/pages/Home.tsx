@@ -43,7 +43,16 @@ const NowItem = ({
   className?: string;
   children: React.ReactNode;
 }) => {
-  return <li className={clx("glass p-2", className)}>{children}</li>;
+  return (
+    <div
+      className={clx(
+        "glass flex flex-col gap-5 rounded-3xl border border-slate-950/5 px-5 py-3 dark:border-white/10",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
 };
 
 export function SheetAddItem() {
@@ -133,24 +142,32 @@ export const Home = () => {
   const isLoading = data.now.get.isLoading;
   const { isAuth } = useAuthStore();
   return (
-    <div className="block h-screen items-center justify-between gap-5 overflow-y-scroll pt-16 md:flex md:overflow-hidden">
+    <div className="mx-auto block h-screen max-w-screen-lg items-center justify-between gap-5 overflow-y-scroll pt-16 md:flex md:overflow-hidden">
       <div className="mb-8 h-fit w-full md:mb-10 md:w-1/3">
         <h1 className="mb-4">Welcome to my site</h1>
         <span className="text-2xl">I'm glad you found it</span>
       </div>
-      <div className="h-screen md:w-2/3 md:overflow-hidden md:overflow-y-scroll md:pt-8 lg:w-7/12">
-        <h2 className="mb-4">What I've been up to:</h2>
+      <div className="h-screen md:w-2/3 md:overflow-hidden md:overflow-y-scroll md:pt-10 lg:w-7/12">
+        <h2 className="mb-8 text-2xl md:mb-0">What I've been up to:</h2>
         {isAuth && <SheetAddItem />}
         {isLoading ? (
           <span>LOADING ....</span>
         ) : (
           <ul className="flex flex-col gap-5 pb-8 md:pt-8 md:pb-16">
             {nowData.map((item) => (
-              <NowItem key={item.id}>
-                <h3 className="text-2xl">{item.title}</h3>
-                <p>{item.desc}</p>
-                <span>{formatDate(item.created_at)}</span>
-              </NowItem>
+              <li key={item.id}>
+                <NowItem className="glass">
+                  <h3 className="text-3xl font-semibold text-pink-500 dark:text-pink-400">
+                    {item.title}
+                  </h3>
+                  <div>
+                    <p>{item.desc}</p>
+                    <span className="text-xs">
+                      {formatDate(item.created_at)}
+                    </span>
+                  </div>
+                </NowItem>
+              </li>
             ))}
           </ul>
         )}
