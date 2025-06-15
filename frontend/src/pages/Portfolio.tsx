@@ -23,7 +23,6 @@ const PItem = ({
       <h2 className="font-semibold text-fuchsia-600 dark:text-fuchsia-400">
         {name}
       </h2>
-      <span>{description}</span>
       <div className="flex flex-1 flex-col gap-2">
         {description.map((item, idx) => (
           <p key={`${name}-${link}-${idx}`}>{item}</p>

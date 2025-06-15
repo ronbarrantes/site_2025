@@ -156,7 +156,7 @@ export const Home = () => {
           <ul className="flex flex-col gap-5 pb-8 md:pt-8 md:pb-16">
             {nowData.map((item) => (
               <li key={item.id}>
-                <NowItem className="glass">
+                <NowItem>
                   <h3 className="text-3xl font-semibold text-pink-500 dark:text-pink-400">
                     {item.title}
                   </h3>
