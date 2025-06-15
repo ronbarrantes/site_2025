@@ -8,16 +8,13 @@ import { useAuthStatus } from "@/hooks/use-api";
 import { useAuthStore } from "@/store/use-auth";
 
 export const Root = () => {
-  const authStatus = useAuthStatus();
+  const { me } = useAuthStatus();
   const { setIsAuth } = useAuthStore();
 
   useEffect(() => {
-    const data = authStatus.me.get.data;
-    const error = authStatus.me.get.error;
-
-    if (error) console.warn(error);
+    const data = me.get.data;
     if (data) setIsAuth(true);
-  }, [authStatus.me.get.data, authStatus.me.get.error, setIsAuth]);
+  }, [me.get.data, me.get.error, setIsAuth]);
 
   return (
     <div className="relative flex h-screen flex-col overflow-hidden">

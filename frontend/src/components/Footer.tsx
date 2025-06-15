@@ -40,7 +40,10 @@ const FooterMediaItem = ({
   return (
     <>
       <a
-        className={classNames("mx-1", isLast && "mr-0")}
+        className={classNames(
+          "mx-1 hover:text-pink-600 hover:dark:text-pink-400",
+          isLast && "mr-0"
+        )}
         href={href}
         target="_blank"
       >
@@ -76,7 +79,12 @@ export const Footer = ({ className }: { className: string }) => {
             className="bg-slate-300 after:bg-slate-300 dark:bg-slate-700 dark:after:bg-slate-700"
           >
             <button onClick={() => toast("QUACK!")}>
-              <Icon tooltip asChild className="ml-2" name="duck" />
+              <Icon
+                tooltip
+                asChild
+                className="ml-2 hover:text-yellow-600 hover:dark:text-yellow-400"
+                name="duck"
+              />
             </button>
           </LineSection>
           <LineSection className="flex gap-2">

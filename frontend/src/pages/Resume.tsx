@@ -1,3 +1,5 @@
+import classNames from "classnames";
+
 import { Icon } from "@/components/icon";
 import { experienceItems, workHistoryText } from "@/data/text";
 import type { WorkExperience } from "@/lib/types";
@@ -10,51 +12,72 @@ const WItem = ({
   description,
   url,
   tools,
-}: WorkExperience) => {
+  className,
+}: WorkExperience & { className: string }) => {
   return (
-    <li>
-      <h2>{jobTitle}</h2>
-      <span>
-        {employer}/{startDate}
-      </span>
-      {endDate && <p>{endDate}</p>}
-      {description.map((item, idx) => (
-        <p key={`${startDate}-${idx}`}>{item}</p>
-      ))}
-      {url && (
-        <a
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 underline"
-        >
-          {url}
-        </a>
+    <div
+      className={classNames(
+        "glass flex flex-col gap-5 rounded-3xl border border-slate-950/5 px-5 py-3 dark:border-white/10",
+        className
       )}
-      <ul className="flex">
-        {tools.map((item, idx) => (
-          <li key={`${startDate}-${item}-${idx}`}>
-            <Icon tooltip name={item} />
-          </li>
+    >
+      <div className="flex flex-col gap-2">
+        <h2 className="font-semibold text-cyan-500 dark:text-cyan-400">
+          {jobTitle}
+        </h2>
+        <div className="flex gap-2">
+          {url ? (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-cyan-500 underline hover:no-underline dark:text-cyan-400"
+            >
+              {employer}
+            </a>
+          ) : (
+            <span>{employer}</span>
+          )}
+          <span className="">::</span>
+          <span>{`${startDate} | ${endDate ? endDate : "Present"}`}</span>
+        </div>
+      </div>
+      <div className="flex flex-1 flex-col gap-2">
+        {description.map((item, idx) => (
+          <p key={`${startDate}-${idx}`}>{item}</p>
         ))}
-      </ul>
-    </li>
+      </div>
+      <div className="flex flex-col gap-2">
+        <span>Tools used:</span>
+        <ul className="ml-2 flex gap-3">
+          {tools.map((item, idx) => (
+            <li key={`${startDate}-${item}-${idx}`}>
+              <Icon tooltip name={item} className="size-6" />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 };
 
 export const Resume = () => {
   return (
-    <div className="h-screen overflow-hidden border border-amber-500 py-18">
-      <h1>{workHistoryText.title}</h1>
-      <div>
+    <div className="flex h-screen flex-col gap-3 overflow-hidden overflow-y-scroll pt-18 pb-10">
+      <div className="mx-8 flex flex-col gap-3">
+        <h1>{workHistoryText.title}</h1>
         <p>{workHistoryText.description}</p>
-        <ul>
+      </div>
+      <div>
+        <ul className="flex flex-col gap-3 md:flex-row md:flex-wrap md:gap-0">
           {experienceItems.map((item, idx) => {
             return (
-              <WItem
+              <li
                 key={`${item.employer}-${item.jobTitle}-${idx}`}
-                {...item}
-              />
+                className="flex lg:w-1/2"
+              >
+                <WItem {...item} className="md:m-2" />
+              </li>
             );
           })}
         </ul>
