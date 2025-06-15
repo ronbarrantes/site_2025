@@ -55,6 +55,11 @@ const NowItem = ({
   );
 };
 
+/**
+ * Renders a sheet component with a form for adding a new "now" item.
+ *
+ * The form collects a title and description, validates input, and submits the data to create a new item. Upon successful submission, the form is reset.
+ */
 export function SheetAddItem() {
   const { data } = useRoutes();
   const form = useForm<z.infer<typeof nowSchema>>({
