@@ -317,6 +317,7 @@ func main() {
 		if input.Title != nil {
 			updates["title"] = *input.Title
 		}
+
 		if input.Desc != nil {
 			updates["desc"] = *input.Desc
 		}
@@ -325,6 +326,8 @@ func main() {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Nothing to update"})
 			return
 		}
+		// Need to do something for if the item was not found (out of bound or something)
+		updates["updated_at"] = time.Now()
 
 		if err := db.Model(&Now{}).Where("id = ?", id).Updates(updates).Error; err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update Now entry"})
