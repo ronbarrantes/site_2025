@@ -13,8 +13,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"gorm.io/gorm/schema"
 )
 
 type Now struct {
@@ -117,9 +119,32 @@ func isBlocked(db *gorm.DB, key string) bool {
 	return attempt.Count >= MAX_ATTEMPTS
 }
 
+func ConnectDB() (*gorm.DB, error) {
+	prefix := os.Getenv("DB_PREFIX")
+
+	naming := schema.NamingStrategy{
+		TablePrefix: prefix,
+	}
+
+	var db *gorm.DB
+	var err error
+
+	if os.Getenv("DB_DRIVER") == "postgres" {
+		dsn := os.Getenv("DATABASE_URL")
+		db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
+			NamingStrategy: naming,
+		})
+	} else {
+		db, err = gorm.Open(sqlite.Open("local.db"), &gorm.Config{
+			NamingStrategy: naming,
+		})
+	}
+	return db, err
+}
+
 func main() {
-	if err := godotenv.Load(".env"); err != nil {
-		log.Fatalf("failed to log the envs: %v", err)
+	if gin.Mode() != gin.ReleaseMode {
+		_ = godotenv.Load(".env")
 	}
 
 	r := gin.Default()
@@ -139,9 +164,9 @@ func main() {
 	api := r.Group("/api")
 	secure := gin.Mode() == gin.ReleaseMode
 
-	db, dbError := gorm.Open(sqlite.Open("rons_backend.db"), &gorm.Config{})
+	db, dbError := ConnectDB()
 	if dbError != nil {
-		panic("failed to connect database")
+		log.Panicf("DB error %v", dbError)
 	}
 
 	// AUTO MIGRATE
@@ -244,6 +269,7 @@ func main() {
 
 		if len(stale) == 0 {
 			c.JSON(http.StatusOK, gin.H{"message": "No stale login attempts"})
+			return
 		}
 
 		ids := make([]uint, len(stale))
@@ -326,11 +352,15 @@ func main() {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Nothing to update"})
 			return
 		}
-		// Need to do something for if the item was not found (out of bound or something)
-		updates["updated_at"] = time.Now()
 
-		if err := db.Model(&Now{}).Where("id = ?", id).Updates(updates).Error; err != nil {
+		res := db.Model(&Now{}).Where("id = ?", id).Updates(updates)
+
+		if res.Error != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update Now entry"})
+			return
+		}
+		if res.RowsAffected == 0 {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Entry not found"})
 			return
 		}
 
