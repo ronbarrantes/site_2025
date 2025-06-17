@@ -14,7 +14,6 @@ import (
 	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/postgres"
-	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 )
@@ -119,31 +118,6 @@ func isBlocked(db *gorm.DB, key string) bool {
 	return attempt.Count >= MAX_ATTEMPTS
 }
 
-// func ConnectDB() (*gorm.DB, error) {
-// 	prefix := os.Getenv("DB_PREFIX")
-
-// 	naming := schema.NamingStrategy{
-// 		TablePrefix: prefix,
-// 	}
-
-// 	var db *gorm.DB
-// 	var err error
-
-// 	if os.Getenv("DB_DRIVER") == "postgres" {
-// 		dsn := os.Getenv("DATABASE_URL")
-// 		db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
-// 			NamingStrategy: naming,
-// 			PrepareStmt:    false,
-// 		})
-
-// 	} else {
-// 		db, err = gorm.Open(sqlite.Open("local.db"), &gorm.Config{
-// 			NamingStrategy: naming,
-// 		})
-// 	}
-// 	return db, err
-// }
-
 func ConnectDB() (*gorm.DB, error) {
 	dsn := os.Getenv("DATABASE_URL")
 	prefix := os.Getenv("DB_PREFIX")
@@ -155,18 +129,12 @@ func ConnectDB() (*gorm.DB, error) {
 	var db *gorm.DB
 	var err error
 
-	if os.Getenv("DB_DRIVER") == "postgres" {
-		db, err = gorm.Open(postgres.New(postgres.Config{
-			DSN:                  dsn,
-			PreferSimpleProtocol: true, // This disables prepared statements
-		}), &gorm.Config{
-			NamingStrategy: withPrefix,
-		})
-	} else {
-		db, err = gorm.Open(sqlite.Open("local.db"), &gorm.Config{
-			NamingStrategy: withPrefix,
-		})
-	}
+	db, err = gorm.Open(postgres.New(postgres.Config{
+		DSN:                  dsn,
+		PreferSimpleProtocol: true,
+	}), &gorm.Config{
+		NamingStrategy: withPrefix,
+	})
 
 	return db, err
 }

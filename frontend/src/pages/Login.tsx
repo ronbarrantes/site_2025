@@ -49,11 +49,11 @@ export function LoginForm() {
     if (error) {
       console.error(error);
       toast.error(`There was a problem: ${error}`);
-      // form.reset();
+      form.reset();
       return;
     }
 
-    console.log("sucess");
+    console.log("success");
 
     console.info("data", data.data);
     setIsAuth(true);
