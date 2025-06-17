@@ -119,10 +119,36 @@ func isBlocked(db *gorm.DB, key string) bool {
 	return attempt.Count >= MAX_ATTEMPTS
 }
 
+// func ConnectDB() (*gorm.DB, error) {
+// 	prefix := os.Getenv("DB_PREFIX")
+
+// 	naming := schema.NamingStrategy{
+// 		TablePrefix: prefix,
+// 	}
+
+// 	var db *gorm.DB
+// 	var err error
+
+// 	if os.Getenv("DB_DRIVER") == "postgres" {
+// 		dsn := os.Getenv("DATABASE_URL")
+// 		db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
+// 			NamingStrategy: naming,
+// 			PrepareStmt:    false,
+// 		})
+
+// 	} else {
+// 		db, err = gorm.Open(sqlite.Open("local.db"), &gorm.Config{
+// 			NamingStrategy: naming,
+// 		})
+// 	}
+// 	return db, err
+// }
+
 func ConnectDB() (*gorm.DB, error) {
+	dsn := os.Getenv("DATABASE_URL")
 	prefix := os.Getenv("DB_PREFIX")
 
-	naming := schema.NamingStrategy{
+	withPrefix := schema.NamingStrategy{
 		TablePrefix: prefix,
 	}
 
@@ -130,15 +156,18 @@ func ConnectDB() (*gorm.DB, error) {
 	var err error
 
 	if os.Getenv("DB_DRIVER") == "postgres" {
-		dsn := os.Getenv("DATABASE_URL")
-		db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
-			NamingStrategy: naming,
+		db, err = gorm.Open(postgres.New(postgres.Config{
+			DSN:                  dsn,
+			PreferSimpleProtocol: true, // This disables prepared statements
+		}), &gorm.Config{
+			NamingStrategy: withPrefix,
 		})
 	} else {
 		db, err = gorm.Open(sqlite.Open("local.db"), &gorm.Config{
-			NamingStrategy: naming,
+			NamingStrategy: withPrefix,
 		})
 	}
+
 	return db, err
 }
 
@@ -234,6 +263,7 @@ func main() {
 	api.GET("/now", func(c *gin.Context) {
 		var nows []Now
 		if err := db.Find(&nows).Error; err != nil {
+			log.Printf("Database error: %v", err)
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"error": "Failed to fetch Nows",
 			})
