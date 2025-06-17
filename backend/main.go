@@ -144,10 +144,6 @@ func main() {
 		_ = godotenv.Load(".env.local")
 	}
 
-	fmt.Println("###################")
-	fmt.Printf("This is a db driver: %s\n", os.Getenv("DB_DRIVER"))
-	fmt.Println("###################")
-
 	r := gin.Default()
 	if err := r.SetTrustedProxies(nil); err != nil {
 		log.Fatalf("failed to set trusted proxies: %v", err)
