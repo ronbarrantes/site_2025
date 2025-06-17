@@ -58,11 +58,7 @@ import {
   SiVite,
   SiWordpress,
 } from "react-icons/si";
-import {
-  TbBrandAzure,
-  TbBrandReactNative,
-  TbBrandTypescript,
-} from "react-icons/tb";
+import { TbBrandAzure, TbBrandReactNative } from "react-icons/tb";
 
 export const iconFileNames = {
   about: { icon: MdOutlineInfo },
