@@ -123,6 +123,7 @@ const useNow = () => {
   const queryClient = useQueryClient();
   const { data, isLoading, error, isPending } = useQuery<NowData[]>({
     queryKey: [queryKeys.NOW],
+    refetchOnWindowFocus: false,
     queryFn: async ({ signal }) => {
       const res = await nowApi.get({ signal });
       return res.data;
