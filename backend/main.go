@@ -141,8 +141,12 @@ func ConnectDB() (*gorm.DB, error) {
 
 func main() {
 	if gin.Mode() != gin.ReleaseMode {
-		_ = godotenv.Load(".env")
+		_ = godotenv.Load(".env.local")
 	}
+
+	fmt.Println("###################")
+	fmt.Printf("This is a db driver: %s\n", os.Getenv("DB_DRIVER"))
+	fmt.Println("###################")
 
 	r := gin.Default()
 	if err := r.SetTrustedProxies(nil); err != nil {
