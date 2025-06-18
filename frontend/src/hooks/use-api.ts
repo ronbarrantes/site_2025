@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 
-import { API_URL } from "@/utils/constants";
+import { BACKEND_URL } from "@/utils/constants";
 
 const queryKeys = {
   NOW: "now",
@@ -29,7 +29,7 @@ export const loginApi = {
   login: async (body: LoginData) => {
     return await axios({
       method: "post",
-      url: `${API_URL}/login`,
+      url: `${BACKEND_URL}/login`,
       data: JSON.stringify(body),
       withCredentials: true,
       headers: { "Content-Type": "application/json" },
@@ -39,7 +39,7 @@ export const loginApi = {
   logout: async () => {
     return await axios({
       method: "post",
-      url: `${API_URL}/logout`,
+      url: `${BACKEND_URL}/logout`,
       withCredentials: true,
     });
   },
@@ -47,7 +47,7 @@ export const loginApi = {
   me: async () => {
     return await axios({
       method: "get",
-      url: `${API_URL}/me`,
+      url: `${BACKEND_URL}/me`,
       withCredentials: true,
     });
   },
@@ -57,7 +57,7 @@ const nowApi = {
   get: async ({ signal }: Signal) => {
     return await axios<NowData[]>({
       method: "get",
-      url: `${API_URL}/now`,
+      url: `${BACKEND_URL}/now`,
       signal,
     });
   },
@@ -65,7 +65,7 @@ const nowApi = {
   post: async ({ body }: { body: Pick<NowData, "title" | "desc"> }) => {
     return await axios({
       method: "post",
-      url: `${API_URL}/now`,
+      url: `${BACKEND_URL}/now`,
       data: JSON.stringify(body),
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
@@ -81,7 +81,7 @@ const nowApi = {
   }) => {
     return await axios({
       method: "put",
-      url: `${API_URL}/now/${id}`,
+      url: `${BACKEND_URL}/now/${id}`,
       data: JSON.stringify(body),
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
@@ -91,7 +91,7 @@ const nowApi = {
   delete: async (id: number) => {
     return await axios({
       method: "delete",
-      url: `${API_URL}/now/${id}`,
+      url: `${BACKEND_URL}/now/${id}`,
       withCredentials: true,
     });
   },

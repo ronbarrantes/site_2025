@@ -11,6 +11,8 @@ export const Root = () => {
   const { me } = useAuthStatus();
   const { setIsAuth } = useAuthStore();
 
+  console.log("VITE BACKEND URL = ", import.meta.env.VITE_BACKEND_URL);
+
   useEffect(() => {
     const data = me.get.data;
     if (data) setIsAuth(true);
